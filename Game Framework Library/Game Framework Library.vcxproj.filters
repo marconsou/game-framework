@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\AppNotification.ixx">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\App.ixx">
+      <Filter>Source\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AppConfiguration.ixx">
+      <Filter>Source\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX12.h">
+      <Filter>Source\Video\Render\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Windows.h">
+      <Filter>Source\App\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WindowsApi.ixx">
+      <Filter>Source\App\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CrtDebugLogWindows.ixx">
+      <Filter>Source\App\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DateTime.ixx">
+      <Filter>Source\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Log.ixx">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AppWindows.ixx">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AppMain.ixx">
+      <Filter>Source\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MutexWindows.ixx">
+      <Filter>Source\App\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AppWindows.cpp">
+      <Filter>Source\App\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DeviceNotification.ixx">
+      <Filter>Source\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Color.ixx">
+      <Filter>Source\Video\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColorPalette.ixx">
+      <Filter>Source\Video\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\File.ixx">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.ixx">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InputState.ixx">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Keyboard.ixx">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\KeyboardKey.ixx">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mouse.ixx">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MouseButton.ixx">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InputWindows.ixx">
+      <Filter>Source\Input\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\KeyboardWindows.ixx">
+      <Filter>Source\Input\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MouseWindows.ixx">
+      <Filter>Source\Input\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectXTKMouse.h">
+      <Filter>Source\Input\Windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{a87ee673-ba66-4fb3-aa56-bc98d387876a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App">
+      <UniqueIdentifier>{8941f787-9a6c-4ec1-8633-30b167ea6598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App\Windows">
+      <UniqueIdentifier>{a9e9ecda-0e44-46b8-8385-5e4ae7ca86cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Video">
+      <UniqueIdentifier>{7642b644-7ef5-4274-af97-c46c3a1350ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Time">
+      <UniqueIdentifier>{b843ab0f-41a9-46a9-a293-1e8cc46173cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\System">
+      <UniqueIdentifier>{5a271652-f9ef-4b83-a7f9-3bbbc115e363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Video\Color">
+      <UniqueIdentifier>{8a9b0bfe-247d-497d-8dbb-ca4f893e4b81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resource">
+      <UniqueIdentifier>{06153ddf-b6b3-4e88-8725-2adc54677f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="License">
+      <UniqueIdentifier>{66fbe659-9333-4ef3-9c80-66b42419f434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{4d9f577e-a1ba-4935-9284-21432616247e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Factory">
+      <UniqueIdentifier>{5fa265c2-5a20-43ca-ac9b-f9f3e31345b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Font">
+      <UniqueIdentifier>{6d6c650f-8ee9-4d92-a120-2fdd00e58fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Input">
+      <UniqueIdentifier>{667dce1a-5a44-4091-a7c9-757f292af033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Input\Windows">
+      <UniqueIdentifier>{d10ab975-7cf3-4a2c-a0bd-2a49bd5f8bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Video\Render">
+      <UniqueIdentifier>{5e78be83-8927-4cf5-b90b-1bf774c36d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Video\Render\Direct3D12">
+      <UniqueIdentifier>{afbeb2b0-4f9d-427b-a4e6-9729540c06ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resource\Loader">
+      <UniqueIdentifier>{4b0f335b-b9ac-4495-bebd-abe9404ed93d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resource\Manager">
+      <UniqueIdentifier>{38e099e7-35b7-4272-bee7-fc0091c6ddb6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TODO.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\DirectXTKKeyboard.h">
+      <Filter>Source\Input\Windows</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
