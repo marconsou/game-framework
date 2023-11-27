@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\AppNotification.ixx">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\App.ixx">
       <Filter>Source\App</Filter>
     </ClCompile>
@@ -27,9 +24,6 @@
     </ClCompile>
     <ClCompile Include="Source\Log.ixx">
       <Filter>Source\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AppWindows.ixx">
-      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\AppMain.ixx">
       <Filter>Source\App</Filter>
@@ -81,6 +75,42 @@
     </ClCompile>
     <ClCompile Include="Source\DirectXTKMouse.h">
       <Filter>Source\Input\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\VideoSystem.ixx">
+      <Filter>Source\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\VideoConfiguration.ixx">
+      <Filter>Source\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Video.ixx">
+      <Filter>Source\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Clock.ixx">
+      <Filter>Source\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.ixx">
+      <Filter>Source\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StepTimer.ixx">
+      <Filter>Source\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ResourceManager.ixx">
+      <Filter>Source\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ResourceStorage.ixx">
+      <Filter>Source\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SystemFactory.ixx">
+      <Filter>Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SystemFactoryWindows.ixx">
+      <Filter>Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AppNotification.ixx">
+      <Filter>Source\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AppWindows.ixx">
+      <Filter>Source\App\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +168,21 @@
     <Filter Include="Source\Resource\Manager">
       <UniqueIdentifier>{38e099e7-35b7-4272-bee7-fc0091c6ddb6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader\HLSL">
+      <UniqueIdentifier>{8511c60a-f916-4724-ae08-ceb6d4e03b5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt" />
+    <Text Include="License\DirectXTK12.txt">
+      <Filter>License</Filter>
+    </Text>
+    <Text Include="License\DirectXMath.txt">
+      <Filter>License</Filter>
+    </Text>
+    <Text Include="License\DirectX-Headers.txt">
+      <Filter>License</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\DirectXTKKeyboard.h">

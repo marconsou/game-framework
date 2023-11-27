@@ -1,6 +1,9 @@
+module;
+
+#include <chrono>
+
 export module DateTime;
 
-import <time.h>;
 import <format>;
 
 export namespace gfl
@@ -10,25 +13,16 @@ export namespace gfl
 	public:
 		static std::string GetDate()
 		{
-			if (const auto localTime = DateTime::GetLocalTime())
-				return std::format("{:0>2}-{:0>2}-{:0>2}", localTime->tm_year + 1900, localTime->tm_mon + 1, localTime->tm_mday);
-			return {};
+			const auto now = std::chrono::system_clock::now();
+			const auto ymd = std::chrono::year_month_day{std::chrono::floor<std::chrono::days>(now)};
+			return std::format("{}-{:0>2}-{:0>2}", static_cast<int>(ymd.year()), unsigned{ymd.month()}, unsigned{ymd.day()});
 		}
 
 		static std::string GetTime()
 		{
-			if (const auto localTime = DateTime::GetLocalTime())
-				return std::format("{:0>2}:{:0>2}:{:0>2}", localTime->tm_hour, localTime->tm_min, localTime->tm_sec);
-			return {};
-		}
-	private:
-		static tm* GetLocalTime()
-		{
-			static tm timeData{};
-			const auto time = _time64(nullptr);
-			if (!_localtime64_s(&timeData, &time))
-				return &timeData;
-			return nullptr;
+			const auto now = std::chrono::system_clock::now();
+			const auto hms = std::chrono::hh_mm_ss{std::chrono::floor<std::chrono::seconds>(now - std::chrono::floor<std::chrono::days>(now))};
+			return std::format("{:0>2}:{:0>2}:{:0>2}", hms.hours().count(), hms.minutes().count(), hms.seconds().count());
 		}
 	};
 }

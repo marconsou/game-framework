@@ -1,12 +1,15 @@
 #include "pch.h"
 #include "Game.h"
 
+#include <chrono>
+
 import AppMain;
 import CrtDebugLogWindows;
 import DateTime;
 import Log;
 import WindowsApi;
-
+import Clock;
+import Timer;
 import ColorPalette;
 
 using namespace DirectX;
@@ -72,6 +75,9 @@ int AppMain::Run()
     
     auto date = DateTime::GetDate();
     auto time = DateTime::GetTime();
+    auto clock = Clock::CurrentTime();
+    Timer timer;
+    timer.GetTicks();
     //Log::Warning("Test");
     auto c = ColorPalette::AliceBlue;
     c.Alpha = 123;

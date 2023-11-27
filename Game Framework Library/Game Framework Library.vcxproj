@@ -17,6 +17,7 @@
     <ClCompile Include="Source\AppNotification.ixx" />
     <ClCompile Include="Source\AppWindows.cpp" />
     <ClCompile Include="Source\AppWindows.ixx" />
+    <ClCompile Include="Source\Clock.ixx" />
     <ClCompile Include="Source\Color.ixx" />
     <ClCompile Include="Source\ColorPalette.ixx" />
     <ClCompile Include="Source\CrtDebugLogWindows.ixx" />
@@ -34,9 +35,21 @@
     <ClCompile Include="Source\MouseButton.ixx" />
     <ClCompile Include="Source\MouseWindows.ixx" />
     <ClCompile Include="Source\MutexWindows.ixx" />
+    <ClCompile Include="Source\ResourceManager.ixx" />
+    <ClCompile Include="Source\ResourceStorage.ixx" />
+    <ClCompile Include="Source\StepTimer.ixx" />
+    <ClCompile Include="Source\SystemFactory.ixx" />
+    <ClCompile Include="Source\SystemFactoryWindows.ixx" />
+    <ClCompile Include="Source\Timer.ixx" />
+    <ClCompile Include="Source\Video.ixx" />
+    <ClCompile Include="Source\VideoConfiguration.ixx" />
+    <ClCompile Include="Source\VideoSystem.ixx" />
     <ClCompile Include="Source\WindowsApi.ixx" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="License\DirectX-Headers.txt" />
+    <Text Include="License\DirectXMath.txt" />
+    <Text Include="License\DirectXTK12.txt" />
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>

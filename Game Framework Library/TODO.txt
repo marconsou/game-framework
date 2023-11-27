@@ -2,3 +2,4 @@ DateTime no time zone = tzdb = Ctr Memory Leak (false positive, no time zone adj
 std::chrono bug: https://developercommunity.visualstudio.com/t/modulesregression-common_type_t-spec/10523480?sort=newest
 TimerManagement, FPSTime and Interval (StepTimer).
 App sleep.
+ResourceStorage shared_ptr and weak_ptr.
