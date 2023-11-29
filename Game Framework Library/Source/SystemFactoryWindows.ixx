@@ -12,9 +12,9 @@ export namespace gfl
 	class SystemFactoryWindows : public SystemFactory
 	{
 	public:
-		std::unique_ptr<App> CreateApp(const AppConfiguration& appConfiguration, AppNotification* appNotification) override
+		std::unique_ptr<App> CreateApp(const AppConfiguration& appConfiguration, AppNotification* appNotification, VideoNotification* videoNotification) override
 		{
-			auto app = std::make_unique<AppWindows>(appConfiguration, appNotification);
+			auto app = std::make_unique<AppWindows>(appConfiguration, appNotification, videoNotification);
 			this->appWindows = app.get();
 			this->appConfiguration = appConfiguration;
 			return app;

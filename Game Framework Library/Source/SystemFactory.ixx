@@ -4,6 +4,7 @@ import <memory>;
 import App;
 import AppConfiguration;
 import AppNotification;
+import VideoNotification;
 
 export namespace gfl
 {
@@ -16,6 +17,6 @@ export namespace gfl
 		SystemFactory& operator=(const SystemFactory&) = delete;
 		SystemFactory& operator=(SystemFactory&&) = delete;
 		virtual ~SystemFactory() = default;
-		virtual std::unique_ptr<App> CreateApp(const AppConfiguration& appConfiguration, AppNotification* appNotification = nullptr) = 0;
+		virtual std::unique_ptr<App> CreateApp(const AppConfiguration& appConfiguration, AppNotification* appNotification = nullptr, VideoNotification* videoNotification = nullptr) = 0;
 	};
 }

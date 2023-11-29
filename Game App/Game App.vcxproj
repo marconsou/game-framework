@@ -78,16 +78,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\DeviceResources.cpp" />
-    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\GameApp.ixx" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\pch.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\DeviceResources.h" />
-    <ClInclude Include="Source\Game.h" />
-    <ClInclude Include="Source\pch.h" />
-    <ClInclude Include="Source\StepTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game Framework Library\Game Framework Library.vcxproj">

@@ -13,7 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Source\App.ixx" />
     <ClCompile Include="Source\AppConfiguration.ixx" />
-    <ClCompile Include="Source\AppMain.ixx" />
+    <ClCompile Include="Source\EntryPoint.ixx" />
     <ClCompile Include="Source\AppNotification.ixx" />
     <ClCompile Include="Source\AppWindows.cpp" />
     <ClCompile Include="Source\AppWindows.ixx" />
@@ -24,6 +24,7 @@
     <ClCompile Include="Source\DateTime.ixx" />
     <ClCompile Include="Source\DeviceNotification.ixx" />
     <ClCompile Include="Source\File.ixx" />
+    <ClCompile Include="Source\Game.ixx" />
     <ClCompile Include="Source\Input.ixx" />
     <ClCompile Include="Source\InputState.ixx" />
     <ClCompile Include="Source\InputWindows.ixx" />
@@ -43,6 +44,8 @@
     <ClCompile Include="Source\Timer.ixx" />
     <ClCompile Include="Source\Video.ixx" />
     <ClCompile Include="Source\VideoConfiguration.ixx" />
+    <ClCompile Include="Source\VideoDirect3D12.ixx" />
+    <ClCompile Include="Source\VideoNotification.ixx" />
     <ClCompile Include="Source\VideoSystem.ixx" />
     <ClCompile Include="Source\WindowsApi.ixx" />
   </ItemGroup>

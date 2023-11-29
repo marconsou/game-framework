@@ -25,9 +25,6 @@
     <ClCompile Include="Source\Log.ixx">
       <Filter>Source\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AppMain.ixx">
-      <Filter>Source\App</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MutexWindows.ixx">
       <Filter>Source\App\Windows</Filter>
     </ClCompile>
@@ -111,6 +108,18 @@
     </ClCompile>
     <ClCompile Include="Source\AppWindows.ixx">
       <Filter>Source\App\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\VideoNotification.ixx">
+      <Filter>Source\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\VideoDirect3D12.ixx">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game.ixx">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntryPoint.ixx">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

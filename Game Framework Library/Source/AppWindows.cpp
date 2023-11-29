@@ -1,7 +1,7 @@
 import "Windows.h";
 import "DirectX12.h";
-import AppMain;
 import CrtDebugLogWindows;
+import EntryPoint;
 import Log;
 import MutexWindows;
 import WindowsApi;
@@ -23,7 +23,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	auto result = EXIT_SUCCESS;
 	const gfl::MutexWindows mutexWindows;
 	if (mutexWindows.IsFirstInstance())
-		result = gfl::AppMain::Run();
+		result = gfl::EntryPoint::Main();
 	else
 		gfl::WindowsApi::RestoreApp();
 

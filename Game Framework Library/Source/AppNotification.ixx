@@ -15,6 +15,6 @@ export namespace gfl
 		virtual void OnDeactivated() = 0;
 		virtual void OnResuming() = 0;
 		virtual void OnSuspending() = 0;
-		virtual void OnSize(int width, int height, bool sizeChanged) = 0;
+		virtual void OnClose() = 0;
 	};
 }

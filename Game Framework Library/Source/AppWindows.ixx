@@ -9,6 +9,7 @@ import AppNotification;
 import KeyboardWindows;
 import Log;
 import MouseWindows;
+import VideoNotification;
 import WindowsApi;
 
 export namespace gfl
@@ -16,9 +17,10 @@ export namespace gfl
 	class AppWindows : public App
 	{
 	public:
-		AppWindows(const AppConfiguration& appConfiguration, AppNotification* appNotification) :
+		AppWindows(const AppConfiguration& appConfiguration, AppNotification* appNotification, VideoNotification* videoNotification) :
 			configuration{appConfiguration},
-			appNotification{appNotification}
+			appNotification{appNotification},
+			videoNotification{videoNotification}
 		{
 			const auto hInstance = GetModuleHandle(nullptr);
 			const auto hIcon = LoadIcon(hInstance, appConfiguration.ResourceIconId ? MAKEINTRESOURCE(appConfiguration.ResourceIconId) : IDI_APPLICATION);
@@ -43,25 +45,10 @@ export namespace gfl
 				Log::Error("RegisterClassEx");
 
 			const auto windowDimension = WindowsApi::GetWindowDimension(appConfiguration);
-			this->handleWindow = CreateWindowEx(0, windowClassEx.lpszClassName, std::wstring{appConfiguration.Title.begin(), appConfiguration.Title.end()}.c_str(), windowDimension.first, windowDimension.second.left, windowDimension.second.top, windowDimension.second.right, windowDimension.second.bottom, nullptr, nullptr, hInstance, nullptr);
+			this->handleWindow = CreateWindowEx(0, windowClassEx.lpszClassName, std::wstring{appConfiguration.Title.begin(), appConfiguration.Title.end()}.c_str(), windowDimension.first, windowDimension.second.left, windowDimension.second.top, windowDimension.second.right, windowDimension.second.bottom, nullptr, nullptr, hInstance, this);
 			if (!this->handleWindow)
 				Log::Error("CreateWindowEx");
 		}
-
-		/*void SetAppNotificationClose(AppNotification* appNotificationClose)
-		{
-			this->appNotificationClose = appNotificationClose;
-		}
-
-		void SetVideoNotificationClose(AppNotification* videoNotificationClose)
-		{
-			this->videoNotificationClose = videoNotificationClose;
-		}*/
-
-		/*void SetVideoNotificationWindowSize(VideoNotificationWindowSize* videoNotificationWindowSize)
-		{
-			this->videoNotificationWindowSize = videoNotificationWindowSize;
-		}*/
 
 		void SetTitle(std::string_view title) const override
 		{
@@ -82,7 +69,6 @@ export namespace gfl
 		{
 			this->onRun = onRun;
 			ShowWindow(this->handleWindow, SW_SHOWNORMAL);
-			SetWindowLongPtr(this->handleWindow, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 
 			MSG msg{};
 			while (msg.message != WM_QUIT)
@@ -97,22 +83,19 @@ export namespace gfl
 					if (this->onRun)
 						this->onRun();
 				}
-
 			}
 			return static_cast<int>(msg.wParam);
 		}
 	private:
 		HWND handleWindow{};
 		AppNotification* appNotification{};
-		//AppNotificationClose* appNotificationClose{};
-		//AppNotificationClose* videoNotificationClose{};
-//		VideoNotificationWindowSize* videoNotificationWindowSize{};
+		VideoNotification* videoNotification{};
 		AppConfiguration configuration;
 		std::function<void()> onRun;
 
 		static LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
-			static constinit bool inSizemove = false;
+			static constinit bool inSizeMove = false;
 			static constinit bool inSuspend = false;
 			static constinit bool minimized = false;
 
@@ -120,12 +103,17 @@ export namespace gfl
 
 			switch (message)
 			{
-			case WM_PAINT:
-				if (inSizemove && app)
+			case WM_CREATE:
+				if (lParam)
 				{
-					if (app->onRun)
-						app->onRun();
+					const auto params = reinterpret_cast<LPCREATESTRUCTW>(lParam);
+					SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(params->lpCreateParams));
 				}
+				break;
+
+			case WM_PAINT:
+				if (inSizeMove && app && app->onRun)
+					app->onRun();
 				else
 				{
 					PAINTSTRUCT ps{};
@@ -133,6 +121,7 @@ export namespace gfl
 					EndPaint(hWnd, &ps);
 				}
 				break;
+
 			case WM_ACTIVATE:
 			case WM_INPUT:
 			case WM_MOUSEMOVE:
@@ -148,123 +137,90 @@ export namespace gfl
 			case WM_MOUSEHOVER:
 				MouseWindows::ProcessMessage(message, wParam, lParam);
 				break;
+
 			case WM_KEYDOWN:
 			case WM_KEYUP:
 			case WM_SYSKEYDOWN:
 			case WM_SYSKEYUP:
 				KeyboardWindows::ProcessMessage(message, wParam, lParam);
 				break;
+
 			case WM_DISPLAYCHANGE:
-				if (app)
-				{
-					//if (app->videoNotificationWindowSize)
-						//app->videoNotificationWindowSize->OnDisplayChange();
-				}
+				if (app && app->videoNotification)
+					app->videoNotification->OnDisplayChange();
 				break;
+
 			case WM_MOVE:
-				if (app)
-				{
-					//if (app->videoNotificationWindowSize)
-						//app->videoNotificationWindowSize->OnWindowMoved();
-				}
+				if (app && app->videoNotification)
+					app->videoNotification->OnWindowMoved();
 				break;
+
 			case WM_SIZE:
 				if (wParam == SIZE_MINIMIZED)
 				{
 					if (!minimized)
 					{
 						minimized = true;
-						if (!inSuspend && app)
-						{
-							//if (app->appNotificationState)
-								//app->appNotificationState->OnSuspending();
-						}
+						if (!inSuspend && app && app->appNotification)
+							app->appNotification->OnSuspending();
 						inSuspend = true;
 					}
 				}
 				else if (minimized)
 				{
 					minimized = false;
-					if (inSuspend && app)
-					{
-						//if (app->appNotificationState)
-							//app->appNotificationState->OnResuming();
-					}
+					if (inSuspend && app && app->appNotification)
+						app->appNotification->OnResuming();
 					inSuspend = false;
 				}
-				else if (!inSizemove && app)
-				{
-					const auto width = LOWORD(lParam);
-					const auto height = HIWORD(lParam);
-
-					auto sizeChanged = false;
-					//if (app->videoNotificationWindowSize)
-						//sizeChanged = app->videoNotificationWindowSize->OnWindowSizeChanged(width, height);
-
-					//if (app->appNotificationState)
-						//app->appNotificationState->OnSize(width, height, sizeChanged);
-				}
+				else if (!inSizeMove && app && app->videoNotification)
+					app->videoNotification->OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
 				break;
+
 			case WM_ENTERSIZEMOVE:
-				inSizemove = true;
+				inSizeMove = true;
 				break;
+
 			case WM_EXITSIZEMOVE:
-				inSizemove = false;
-				if (app)
+				inSizeMove = false;
+				if (app && app->videoNotification)
 				{
 					RECT rc{};
 					GetClientRect(hWnd, &rc);
-
-					const auto width = rc.right - rc.left;
-					const auto height = rc.bottom - rc.top;
-
-					auto sizeChanged = false;
-					//if (app->videoNotificationWindowSize)
-						//sizeChanged = app->videoNotificationWindowSize->OnWindowSizeChanged(width, height);
-
-					//if (app->appNotificationState)
-						//app->appNotificationState->OnSize(width, height, sizeChanged);
+					app->videoNotification->OnWindowSizeChanged(rc.right - rc.left, rc.bottom - rc.top);
 				}
 				break;
+
 			case WM_ACTIVATEAPP:
-				if (app)
+				if (app && app->appNotification)
 				{
 					if (wParam)
-					{
-						//if (app->appNotificationState)
-							//app->appNotificationState->OnActivated();
-					}
+						app->appNotification->OnActivated();
 					else
-					{
-						//if (app->appNotificationState)
-							//app->appNotificationState->OnDeactivated();
-					}
+						app->appNotification->OnDeactivated();
 				}
 				break;
+
 			case WM_POWERBROADCAST:
 				switch (wParam)
 				{
 				case PBT_APMQUERYSUSPEND:
-					if (!inSuspend && app)
-					{
-						//if (app->appNotificationState)
-							//app->appNotificationState->OnSuspending();
-					}
+					if (!inSuspend && app && app->appNotification)
+						app->appNotification->OnSuspending();
 					inSuspend = true;
 					return TRUE;
+
 				case PBT_APMRESUMESUSPEND:
 					if (!minimized)
 					{
-						if (inSuspend && app)
-						{
-							//if (app->appNotificationState)
-								//app->appNotificationState->OnResuming();
-						}
+						if (inSuspend && app && app->appNotification)
+							app->appNotification->OnResuming();
 						inSuspend = false;
 					}
 					return TRUE;
 				}
 				break;
+
 			case WM_SETCURSOR:
 				if (app && !app->configuration.ShowCursor)
 				{
@@ -283,24 +239,26 @@ export namespace gfl
 					}
 				}
 				break;
+
 			case WM_MOUSEACTIVATE:
 				return MA_ACTIVATEANDEAT; // When you click activate the window, we want Mouse to ignore that event.
+
 			case WM_MENUCHAR:
 				return MAKELRESULT(0, MNC_CLOSE); // A menu is active and the user presses a key that does not correspond to any mnemonic or accelerator key. Ignore so we don't produce an error beep.
+
 			case WM_SYSCOMMAND:
 				if ((wParam == SC_SCREENSAVE) || (wParam == SC_MONITORPOWER) || (wParam == SC_KEYMENU))
 					return 0;
 				break;
-			case WM_CLOSE:
-				//if (app && app->appNotificationClose)
-					//app->appNotificationClose->OnClose();
 
-				//if (app && app->videoNotificationClose)
-					//app->videoNotificationClose->OnClose();
+			case WM_CLOSE:
+				if (app && app->appNotification)
+					app->appNotification->OnClose();
 
 				if (!DestroyWindow(hWnd))
 					Log::Error("DestroyWindow");
 				break;
+
 			case WM_DESTROY:
 				PostQuitMessage(0);
 				break;
