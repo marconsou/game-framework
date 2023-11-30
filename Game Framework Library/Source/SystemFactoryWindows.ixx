@@ -1,17 +1,9 @@
 export module SystemFactoryWindows;
 
-import App;
-import AppConfiguration;
-import AppNotification;
 import AppWindows;
-import DeviceStateNotification;
-import Input;
 import InputWindows;
 import SystemFactory;
-import Video;
-import VideoConfiguration;
 import VideoDirect3D12;
-import VideoSystem;
 
 export namespace gfl
 {

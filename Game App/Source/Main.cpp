@@ -1,14 +1,14 @@
 import <format>;
 import ColorPalette;
 import EntryPoint;
-import Game;
+import GameApp;
 
 using namespace std;
 using namespace gfl;
 
 int EntryPoint::Main()
 {
-	Game game;
+	GameApp game;
 	return game.App->OnRun([&]
 	{ 
 		game.Input->Update();
