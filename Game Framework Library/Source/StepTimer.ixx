@@ -102,6 +102,7 @@ export namespace gfl
 		uint32_t framesThisSecond{};
 		uint64_t secondCounter{};
 		Timer timer;
+		static constexpr uint64_t TicksPerSecond = 10'000'000;
 
 		uint64_t CalculateTimeDelta()
 		{
@@ -166,8 +167,6 @@ export namespace gfl
 				this->secondCounter %= StepTimer::TicksPerSecond;
 			}
 		}
-
-		static constexpr uint64_t TicksPerSecond = 10'000'000;
 
 		static double TicksToSeconds(uint64_t ticks)
 		{

@@ -14,5 +14,8 @@ export namespace gfl
 		Video& operator=(Video&&) = delete;
 		virtual ~Video() = default;
 		virtual void Render(const Color& clearColor) = 0;
+		virtual bool OnWindowSizeChanged(int width, int height) = 0;
+		virtual void OnWindowMoved() = 0;
+		virtual void OnDisplayChange() = 0;
 	};
 }

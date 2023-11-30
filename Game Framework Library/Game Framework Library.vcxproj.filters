@@ -31,7 +31,7 @@
     <ClCompile Include="Source\AppWindows.cpp">
       <Filter>Source\App\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DeviceNotification.ixx">
+    <ClCompile Include="Source\DeviceStateNotification.ixx">
       <Filter>Source\Video</Filter>
     </ClCompile>
     <ClCompile Include="Source\Color.ixx">
@@ -108,9 +108,6 @@
     </ClCompile>
     <ClCompile Include="Source\AppWindows.ixx">
       <Filter>Source\App\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\VideoNotification.ixx">
-      <Filter>Source\Video</Filter>
     </ClCompile>
     <ClCompile Include="Source\VideoDirect3D12.ixx">
       <Filter>Source</Filter>

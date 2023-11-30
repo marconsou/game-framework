@@ -1,34 +1,49 @@
+module;
+
+#include "Windows.h"
+#include "DirectX12.h"
+
 export module VideoDirect3D12;
 
-import "Windows.h";
-import "DirectX12.h";
-import DeviceNotification;
+//import "Windows.h";
+//import "DirectX12.h";
+import Color;
+import ColorPalette;
+import DeviceStateNotification;
+import Video;
+import VideoConfiguration;
+import WindowsApi;
 
 export namespace gfl
 {
-	class VideoDirect3D12 //: public Video
+	class VideoDirect3D12 : public Video
 	{
 	public:
 		static constexpr unsigned int c_AllowTearing = 0x1;
 		static constexpr unsigned int c_EnableHDR = 0x2;
 		static constexpr unsigned int c_ReverseDepth = 0x4;
 
-		VideoDirect3D12(DXGI_FORMAT backBufferFormat = DXGI_FORMAT_B8G8R8A8_UNORM, DXGI_FORMAT depthBufferFormat = DXGI_FORMAT_D32_FLOAT, UINT backBufferCount = 2, D3D_FEATURE_LEVEL minFeatureLevel = D3D_FEATURE_LEVEL_11_0, unsigned int flags = 0) :
-			m_backBufferFormat(backBufferFormat),
-			m_depthBufferFormat(depthBufferFormat),
-			m_backBufferCount(backBufferCount),
-			m_d3dMinFeatureLevel(minFeatureLevel),
-			m_options(flags)
+		VideoDirect3D12(const VideoConfiguration& videoConfiguration, DeviceStateNotification* deviceStateNotification, unsigned int flags = 0) :
+			m_backBufferFormat(DXGI_FORMAT_B8G8R8A8_UNORM),
+			m_depthBufferFormat(DXGI_FORMAT_D32_FLOAT),
+			m_backBufferCount(2),
+			m_d3dMinFeatureLevel(D3D_FEATURE_LEVEL_11_0),
+			m_options(flags),
+			deviceStateNotification{deviceStateNotification}
 		{
-			if (backBufferCount < 2 || backBufferCount > MAX_BACK_BUFFER_COUNT)
+			if (this->m_backBufferCount < 2 || this->m_backBufferCount > MAX_BACK_BUFFER_COUNT)
 			{
 				throw std::exception("invalid backBufferCount");
 			}
 
-			if (minFeatureLevel < D3D_FEATURE_LEVEL_11_0)
+			if (this->m_d3dMinFeatureLevel < D3D_FEATURE_LEVEL_11_0)
 			{
 				throw std::exception("minFeatureLevel too low");
 			}
+
+			this->SetWindow(videoConfiguration.Width, videoConfiguration.Height);
+			this->CreateDeviceResources();
+			this->CreateWindowSizeDependentResources();
 		}
 
 		~VideoDirect3D12()
@@ -37,11 +52,26 @@ export namespace gfl
 			this->WaitForGpu();
 		}
 
+		bool OnWindowSizeChanged(int width, int height) override
+		{
+			return this->WindowSizeChanged(width, height);
+		}
+
+		void OnWindowMoved() override
+		{
+			const auto rect = this->GetOutputSize();
+			this->WindowSizeChanged(rect.right, rect.bottom);
+		}
+
+		void OnDisplayChange() override
+		{
+			this->UpdateColorSpace();
+		}
+
 		void CreateDeviceResources()
 		{
 #if defined(_DEBUG)
 			// Enable the debug layer (requires the Graphics Tools "optional feature").
-			//
 			// NOTE: Enabling the debug layer after device creation will invalidate the active device.
 			{
 				Microsoft::WRL::ComPtr<ID3D12Debug> debugController;
@@ -221,6 +251,23 @@ export namespace gfl
 		{
 			throw std::exception("std::error_code(static_cast<int>(GetLastError()), std::system_category())");
 		}
+
+
+		// Check Shader Model 6 support
+		D3D12_FEATURE_DATA_SHADER_MODEL shaderModel = {D3D_SHADER_MODEL_6_0};
+		if (FAILED(this->m_d3dDevice->CheckFeatureSupport(D3D12_FEATURE_SHADER_MODEL, &shaderModel, sizeof(shaderModel))) || (shaderModel.HighestShaderModel < D3D_SHADER_MODEL_6_0))
+		{
+#ifdef _DEBUG
+			OutputDebugStringA("ERROR: Shader Model 6.0 is not supported!\n");
+#endif
+			throw std::exception("Shader Model 6.0 is not supported!");
+		}
+
+
+		// If using the DirectX Tool Kit for DX12, uncomment this line:
+		// m_graphicsMemory = std::make_unique<GraphicsMemory>(device);
+
+		// TODO: Initialize device dependent objects here (independent of window size).
 		}
 
 		void CreateWindowSizeDependentResources()
@@ -400,9 +447,9 @@ export namespace gfl
 			m_scissorRect.bottom = static_cast<LONG>(backBufferHeight);
 		}
 
-		void SetWindow(HWND window, int width, int height)
+		void SetWindow(int width, int height)
 		{
-			m_window = window;
+			m_window = WindowsApi::GetHandleWindow();
 
 			m_outputSize.left = m_outputSize.top = 0;
 			m_outputSize.right = static_cast<long>(width);
@@ -433,10 +480,8 @@ export namespace gfl
 
 		void HandleDeviceLost()
 		{
-			if (m_deviceNotify)
-			{
-				m_deviceNotify->OnDeviceLost();
-			}
+			if (this->deviceStateNotification)
+				this->deviceStateNotification->OnDeviceLost();
 
 			for (UINT n = 0; n < m_backBufferCount; n++)
 			{
@@ -467,15 +512,8 @@ export namespace gfl
 			CreateDeviceResources();
 			CreateWindowSizeDependentResources();
 
-			if (m_deviceNotify)
-			{
-				m_deviceNotify->OnDeviceRestored();
-			}
-		}
-
-		void RegisterDeviceNotify(DeviceNotification* deviceNotify)
-		{
-			m_deviceNotify = deviceNotify;
+			if (this->deviceStateNotification)
+				this->deviceStateNotification->OnDeviceRestored();
 		}
 
 		void Prepare(D3D12_RESOURCE_STATES beforeState = D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATES afterState = D3D12_RESOURCE_STATE_RENDER_TARGET)
@@ -492,6 +530,21 @@ export namespace gfl
 					beforeState, afterState);
 				m_commandList->ResourceBarrier(1, &barrier);
 			}
+		}
+
+		void Clear(const Color& clearColor)
+		{
+			// Clear the views.
+			auto const rtvDescriptor = this->GetRenderTargetView();
+			auto const dsvDescriptor = this->GetDepthStencilView();
+
+			this->m_commandList->OMSetRenderTargets(1, &rtvDescriptor, FALSE, &dsvDescriptor);
+			this->m_commandList->ClearRenderTargetView(rtvDescriptor, &clearColor.GetFloat4()[0], 0, nullptr);
+			this->m_commandList->ClearDepthStencilView(dsvDescriptor, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+			// Set the viewport and scissor rect.
+			this->m_commandList->RSSetViewports(1, &this->m_screenViewport);
+			this->m_commandList->RSSetScissorRects(1, &this->m_scissorRect);
 		}
 
 		void Present(D3D12_RESOURCE_STATES beforeState = D3D12_RESOURCE_STATE_RENDER_TARGET)
@@ -546,6 +599,23 @@ export namespace gfl
 					UpdateColorSpace();
 				}
 			}
+		}
+
+		void Render(const Color& clearColor)
+		{
+			this->Prepare();
+			this->Clear(clearColor);
+
+			this->m_commandList;
+
+			// TODO: Add your rendering code here.
+
+
+			// Show the new frame.
+			this->Present();
+
+			// If using the DirectX Tool Kit for DX12, uncomment this line:
+			// m_graphicsMemory->Commit(m_deviceResources->GetCommandQueue());
 		}
 
 		void WaitForGpu()
@@ -678,7 +748,7 @@ export namespace gfl
 		RECT GetOutputSize() const { return m_outputSize; }
 
 		// Direct3D Accessors.
-		auto                        GetD3DDevice() const { return m_d3dDevice.Get(); }
+		//auto                        GetD3DDevice() const { return m_d3dDevice.Get(); }
 		auto                        GetSwapChain() const { return m_swapChain.Get(); }
 		auto                        GetDXGIFactory() const { return m_dxgiFactory.Get(); }
 		HWND                        GetWindow() const { return m_window; }
@@ -877,8 +947,7 @@ export namespace gfl
 		// DeviceResources options (see flags above)
 		unsigned int                                        m_options{};
 
-		// The IDeviceNotify can be held directly as it owns the DeviceResources.
-		DeviceNotification* m_deviceNotify{};
+		DeviceStateNotification* deviceStateNotification{};
 
 		inline DXGI_FORMAT NoSRGB(DXGI_FORMAT fmt) noexcept
 		{
@@ -893,7 +962,7 @@ export namespace gfl
 
 		inline long ComputeIntersectionArea(long ax1, long ay1, long ax2, long ay2, long bx1, long by1, long bx2, long by2) noexcept
 		{
-			return max(0l, min(ax2, bx2) - max(ax1, bx1)) * max(0l, min(ay2, by2) - max(ay1, by1));
+			return std::max(0l, std::min(ax2, bx2) - std::max(ax1, bx1)) * std::max(0l, std::min(ay2, by2) - std::max(ay1, by1));
 		}
 
 		// Helper utility converts D3D API failures into exceptions.

@@ -3,3 +3,4 @@ std::chrono bug: https://developercommunity.visualstudio.com/t/modulesregression
 TimerManagement, FPSTime and Interval (StepTimer).
 App sleep.
 ResourceStorage shared_ptr and weak_ptr.
+https://gameprogrammingpatterns.com/game-loop.html

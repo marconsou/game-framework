@@ -9,7 +9,6 @@ import AppNotification;
 import KeyboardWindows;
 import Log;
 import MouseWindows;
-import VideoNotification;
 import WindowsApi;
 
 export namespace gfl
@@ -17,10 +16,9 @@ export namespace gfl
 	class AppWindows : public App
 	{
 	public:
-		AppWindows(const AppConfiguration& appConfiguration, AppNotification* appNotification, VideoNotification* videoNotification) :
+		AppWindows(const AppConfiguration& appConfiguration, AppNotification* appNotification) :
 			configuration{appConfiguration},
-			appNotification{appNotification},
-			videoNotification{videoNotification}
+			appNotification{appNotification}
 		{
 			const auto hInstance = GetModuleHandle(nullptr);
 			const auto hIcon = LoadIcon(hInstance, appConfiguration.ResourceIconId ? MAKEINTRESOURCE(appConfiguration.ResourceIconId) : IDI_APPLICATION);
@@ -62,7 +60,7 @@ export namespace gfl
 
 		void Quit() const override
 		{
-			SendMessage(this->handleWindow, WM_CLOSE, 0, 0);
+			PostQuitMessage(0);
 		}
 
 		int OnRun(std::function<void()> onRun) override
@@ -84,12 +82,15 @@ export namespace gfl
 						this->onRun();
 				}
 			}
+
+			if (this->appNotification)
+				this->appNotification->OnQuit();
+
 			return static_cast<int>(msg.wParam);
 		}
 	private:
 		HWND handleWindow{};
 		AppNotification* appNotification{};
-		VideoNotification* videoNotification{};
 		AppConfiguration configuration;
 		std::function<void()> onRun;
 
@@ -146,13 +147,13 @@ export namespace gfl
 				break;
 
 			case WM_DISPLAYCHANGE:
-				if (app && app->videoNotification)
-					app->videoNotification->OnDisplayChange();
+				if (app && app->appNotification)
+					app->appNotification->OnDisplayChange();
 				break;
 
 			case WM_MOVE:
-				if (app && app->videoNotification)
-					app->videoNotification->OnWindowMoved();
+				if (app && app->appNotification)
+					app->appNotification->OnWindowMoved();
 				break;
 
 			case WM_SIZE:
@@ -173,8 +174,8 @@ export namespace gfl
 						app->appNotification->OnResuming();
 					inSuspend = false;
 				}
-				else if (!inSizeMove && app && app->videoNotification)
-					app->videoNotification->OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
+				else if (!inSizeMove && app && app->appNotification)
+					app->appNotification->OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
 				break;
 
 			case WM_ENTERSIZEMOVE:
@@ -183,11 +184,11 @@ export namespace gfl
 
 			case WM_EXITSIZEMOVE:
 				inSizeMove = false;
-				if (app && app->videoNotification)
+				if (app && app->appNotification)
 				{
 					RECT rc{};
 					GetClientRect(hWnd, &rc);
-					app->videoNotification->OnWindowSizeChanged(rc.right - rc.left, rc.bottom - rc.top);
+					app->appNotification->OnWindowSizeChanged(rc.right - rc.left, rc.bottom - rc.top);
 				}
 				break;
 
@@ -252,9 +253,6 @@ export namespace gfl
 				break;
 
 			case WM_CLOSE:
-				if (app && app->appNotification)
-					app->appNotification->OnClose();
-
 				if (!DestroyWindow(hWnd))
 					Log::Error("DestroyWindow");
 				break;

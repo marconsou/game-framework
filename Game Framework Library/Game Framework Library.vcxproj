@@ -22,7 +22,7 @@
     <ClCompile Include="Source\ColorPalette.ixx" />
     <ClCompile Include="Source\CrtDebugLogWindows.ixx" />
     <ClCompile Include="Source\DateTime.ixx" />
-    <ClCompile Include="Source\DeviceNotification.ixx" />
+    <ClCompile Include="Source\DeviceStateNotification.ixx" />
     <ClCompile Include="Source\File.ixx" />
     <ClCompile Include="Source\Game.ixx" />
     <ClCompile Include="Source\Input.ixx" />
@@ -45,7 +45,6 @@
     <ClCompile Include="Source\Video.ixx" />
     <ClCompile Include="Source\VideoConfiguration.ixx" />
     <ClCompile Include="Source\VideoDirect3D12.ixx" />
-    <ClCompile Include="Source\VideoNotification.ixx" />
     <ClCompile Include="Source\VideoSystem.ixx" />
     <ClCompile Include="Source\WindowsApi.ixx" />
   </ItemGroup>

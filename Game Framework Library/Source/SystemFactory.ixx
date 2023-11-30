@@ -4,7 +4,11 @@ import <memory>;
 import App;
 import AppConfiguration;
 import AppNotification;
-import VideoNotification;
+import DeviceStateNotification;
+import Input;
+import Video;
+import VideoConfiguration;
+import VideoSystem;
 
 export namespace gfl
 {
@@ -17,6 +21,8 @@ export namespace gfl
 		SystemFactory& operator=(const SystemFactory&) = delete;
 		SystemFactory& operator=(SystemFactory&&) = delete;
 		virtual ~SystemFactory() = default;
-		virtual std::unique_ptr<App> CreateApp(const AppConfiguration& appConfiguration, AppNotification* appNotification = nullptr, VideoNotification* videoNotification = nullptr) = 0;
+		virtual std::unique_ptr<App> CreateApp(const AppConfiguration& appConfiguration, AppNotification* appNotification) = 0;
+		virtual std::unique_ptr<Video> CreateVideo(const VideoConfiguration& videoConfiguration, VideoSystem videoSystem, DeviceStateNotification* deviceStateNotification) = 0;
+		virtual std::unique_ptr<Input> CreateInput() = 0;
 	};
 }

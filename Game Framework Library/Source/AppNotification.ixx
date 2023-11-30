@@ -15,6 +15,9 @@ export namespace gfl
 		virtual void OnDeactivated() = 0;
 		virtual void OnResuming() = 0;
 		virtual void OnSuspending() = 0;
-		virtual void OnClose() = 0;
+		virtual void OnQuit() = 0;
+		virtual void OnWindowSizeChanged(int width, int height) = 0;
+		virtual void OnWindowMoved() = 0;
+		virtual void OnDisplayChange() = 0;
 	};
 }
