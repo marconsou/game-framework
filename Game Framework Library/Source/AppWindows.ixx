@@ -17,7 +17,7 @@ export namespace gfl
 	{
 	public:
 		AppWindows(const AppConfiguration& appConfiguration, AppNotification* appNotification) :
-			configuration{appConfiguration},
+			appConfiguration{appConfiguration},
 			appNotification{appNotification}
 		{
 			const auto hInstance = GetModuleHandle(nullptr);
@@ -91,7 +91,7 @@ export namespace gfl
 	private:
 		HWND handleWindow{};
 		AppNotification* appNotification{};
-		AppConfiguration configuration;
+		AppConfiguration appConfiguration;
 		std::function<void()> onRun;
 
 		static LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -223,9 +223,9 @@ export namespace gfl
 				break;
 
 			case WM_SETCURSOR:
-				if (app && !app->configuration.ShowCursor)
+				if (app && !app->appConfiguration.ShowCursor)
 				{
-					static auto showCursor = app->configuration.ShowCursor;
+					static auto showCursor = app->appConfiguration.ShowCursor;
 					const auto hitTest = LOWORD(lParam);
 
 					if (hitTest == HTCLIENT && !showCursor)

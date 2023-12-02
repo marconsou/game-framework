@@ -20,6 +20,8 @@ public:
 		this->CreateDeviceDependentResources();
 		this->CreateWindowSizeDependentResources();
 
+		
+
 		// TODO: Provide parameters for swapchain format, depth/stencil format, and backbuffer count.
 		//   Add DX::DeviceResources::c_AllowTearing to opt-in to variable rate displays.
 		//   Add DX::DeviceResources::c_EnableHDR for HDR10 display.

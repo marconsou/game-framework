@@ -3,11 +3,14 @@ import ColorPalette;
 import EntryPoint;
 import GameApp;
 
+import DateTime;
+
 using namespace std;
 using namespace gfl;
 
 int EntryPoint::Main()
 {
+	const auto date = DateTime::GetDate();
 	GameApp game;
 	return game.App->OnRun([&]
 	{ 
@@ -15,8 +18,8 @@ int EntryPoint::Main()
 
 		game.App->SetTitle(format("{}fps {:.1f}s", game.GlobalTimer.GetFramesPerSecond(), game.GlobalTimer.GetTotalSeconds()));
 
-		if (game.Input->IsKeyboardKey(KeyboardKey::Escape, InputState::Released))
-		//if (game.Input->IsMouseButton(MouseButton::Right, InputState::Released))
+		if (game.Input->IsKeyboardKey(KeyboardKey::Escape, InputState::Released) || 
+			game.Input->IsMouseButton(MouseButton::Right, InputState::Released))
 			game.App->Quit();
 
 		game.Run(ColorPalette::SkyBlue);

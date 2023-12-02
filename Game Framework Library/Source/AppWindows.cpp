@@ -17,15 +17,14 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		gfl::Log::Error("XMVerifyCPUSupport");
 
 	Microsoft::WRL::Wrappers::RoInitializeWrapper initialize{RO_INIT_MULTITHREADED};
-	if (FAILED(initialize))
+	if FAILED(initialize)
 		gfl::Log::Error("RoInitializeWrapper RO_INIT_MULTITHREADED");
 
-	auto result = EXIT_SUCCESS;
 	const gfl::MutexWindows mutexWindows;
 	if (mutexWindows.IsFirstInstance())
-		result = gfl::EntryPoint::Main();
+		return gfl::EntryPoint::Main();
 	else
 		gfl::WindowsApi::RestoreApp();
 
-	return result;
+	return EXIT_SUCCESS;
 }
