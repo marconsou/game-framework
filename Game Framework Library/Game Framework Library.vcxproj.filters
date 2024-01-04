@@ -30,8 +30,8 @@
     <ClCompile Include="Source\KeyboardKey.ixx" />
     <ClCompile Include="Source\Mouse.ixx" />
     <ClCompile Include="Source\MouseButton.ixx" />
-    <ClCompile Include="Source\File.ixx" />
-    <ClCompile Include="Source\Log.ixx" />
+    <ClCompile Include="Source\System\File.ixx" />
+    <ClCompile Include="Source\System\Log.ixx" />
     <ClCompile Include="Source\DeviceStateNotification.ixx" />
     <ClCompile Include="Source\Video.ixx" />
     <ClCompile Include="Source\VideoConfiguration.ixx" />
@@ -41,6 +41,8 @@
     <ClCompile Include="Source\VideoDirect3D12.ixx" />
     <ClCompile Include="Source\Color.ixx" />
     <ClCompile Include="Source\ColorPalette.ixx" />
+    <ClCompile Include="Source\System\Log.cpp" />
+    <ClCompile Include="Source\System\File.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt" />
