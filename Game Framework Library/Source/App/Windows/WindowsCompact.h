@@ -1,5 +1,5 @@
-#ifndef WINDOWS_H
-#define WINDOWS_H
+#ifndef WINDOWSCOMPACT_H
+#define WINDOWSCOMPACT_H
 
 #include <winsdkver.h>
 #ifndef _WIN32_WINNT
@@ -19,6 +19,10 @@
 #include <Windows.h>
 
 #include <wrl/client.h>
+
+#pragma warning( push )
+#pragma warning( disable : 5260 )
 #include <wrl/event.h>
+#pragma warning( pop )
 
 #endif
