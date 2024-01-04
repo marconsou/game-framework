@@ -39,10 +39,11 @@
     <ClCompile Include="Source\EntryPoint.ixx" />
     <ClCompile Include="Source\Game.ixx" />
     <ClCompile Include="Source\VideoDirect3D12.ixx" />
-    <ClCompile Include="Source\Color.ixx" />
-    <ClCompile Include="Source\ColorPalette.ixx" />
+    <ClCompile Include="Source\Video\Color\Color.ixx" />
+    <ClCompile Include="Source\Video\Color\ColorPalette.ixx" />
     <ClCompile Include="Source\System\Log.cpp" />
     <ClCompile Include="Source\System\File.cpp" />
+    <ClCompile Include="Source\Video\Color\Color.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt" />

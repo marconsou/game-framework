@@ -22,8 +22,9 @@
     <ClCompile Include="Source\AppWindows.cpp" />
     <ClCompile Include="Source\AppWindows.ixx" />
     <ClCompile Include="Source\Time\Clock.ixx" />
-    <ClCompile Include="Source\Color.ixx" />
-    <ClCompile Include="Source\ColorPalette.ixx" />
+    <ClCompile Include="Source\Video\Color\Color.cpp" />
+    <ClCompile Include="Source\Video\Color\Color.ixx" />
+    <ClCompile Include="Source\Video\Color\ColorPalette.ixx" />
     <ClCompile Include="Source\CrtDebugLogWindows.ixx" />
     <ClCompile Include="Source\Time\DateTime.ixx" />
     <ClCompile Include="Source\DeviceStateNotification.ixx" />
