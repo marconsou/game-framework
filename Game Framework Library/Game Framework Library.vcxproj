@@ -13,6 +13,9 @@
   <ItemGroup>
     <ClCompile Include="Source\App.ixx" />
     <ClCompile Include="Source\AppConfiguration.ixx" />
+    <ClCompile Include="Source\Input\Windows\InputWindows.cpp" />
+    <ClCompile Include="Source\Input\Windows\KeyboardWindows.cpp" />
+    <ClCompile Include="Source\Input\Windows\MouseWindows.cpp" />
     <ClCompile Include="Source\System\File.cpp" />
     <ClCompile Include="Source\System\Log.cpp" />
     <ClCompile Include="Source\Time\Clock.cpp" />
@@ -30,16 +33,16 @@
     <ClCompile Include="Source\DeviceStateNotification.ixx" />
     <ClCompile Include="Source\System\File.ixx" />
     <ClCompile Include="Source\Game.ixx" />
-    <ClCompile Include="Source\Input.ixx" />
-    <ClCompile Include="Source\InputState.ixx" />
-    <ClCompile Include="Source\InputWindows.ixx" />
-    <ClCompile Include="Source\Keyboard.ixx" />
-    <ClCompile Include="Source\KeyboardKey.ixx" />
-    <ClCompile Include="Source\KeyboardWindows.ixx" />
+    <ClCompile Include="Source\Input\Input.ixx" />
+    <ClCompile Include="Source\Input\InputState.ixx" />
+    <ClCompile Include="Source\Input\Windows\InputWindows.ixx" />
+    <ClCompile Include="Source\Input\Keyboard.ixx" />
+    <ClCompile Include="Source\Input\KeyboardKey.ixx" />
+    <ClCompile Include="Source\Input\Windows\KeyboardWindows.ixx" />
     <ClCompile Include="Source\System\Log.ixx" />
-    <ClCompile Include="Source\Mouse.ixx" />
-    <ClCompile Include="Source\MouseButton.ixx" />
-    <ClCompile Include="Source\MouseWindows.ixx" />
+    <ClCompile Include="Source\Input\Mouse.ixx" />
+    <ClCompile Include="Source\Input\MouseButton.ixx" />
+    <ClCompile Include="Source\Input\Windows\MouseWindows.ixx" />
     <ClCompile Include="Source\MutexWindows.ixx" />
     <ClCompile Include="Source\ResourceManager.ixx" />
     <ClCompile Include="Source\ResourceStorage.ixx" />
