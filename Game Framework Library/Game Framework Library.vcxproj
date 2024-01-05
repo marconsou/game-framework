@@ -17,7 +17,7 @@
     <ClCompile Include="Source\App\Windows\CrtDebugLogWindows.cpp" />
     <ClCompile Include="Source\App\Windows\MutexWindows.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsApi.cpp" />
-    <ClCompile Include="Source\Factory\SystemFactoryWindows.cpp" />
+    <ClCompile Include="Source\Factory\Windows\SystemFactoryWindows.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Input\Windows\InputWindows.cpp" />
     <ClCompile Include="Source\Input\Windows\KeyboardWindows.cpp" />
@@ -55,7 +55,7 @@
     <ClCompile Include="Source\Time\StepTimer.cpp" />
     <ClCompile Include="Source\Time\StepTimer.ixx" />
     <ClCompile Include="Source\Factory\SystemFactory.ixx" />
-    <ClCompile Include="Source\Factory\SystemFactoryWindows.ixx" />
+    <ClCompile Include="Source\Factory\Windows\SystemFactoryWindows.ixx" />
     <ClCompile Include="Source\Time\Timer.cpp" />
     <ClCompile Include="Source\Time\Timer.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D12\VideoDirect3D12.cpp" />

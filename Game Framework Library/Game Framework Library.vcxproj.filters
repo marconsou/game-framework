@@ -18,7 +18,7 @@
     <ClCompile Include="Source\App\AppConfiguration.ixx" />
     <ClCompile Include="Source\App\AppNotification.ixx" />
     <ClCompile Include="Source\Factory\SystemFactory.ixx" />
-    <ClCompile Include="Source\Factory\SystemFactoryWindows.ixx" />
+    <ClCompile Include="Source\Factory\Windows\SystemFactoryWindows.ixx" />
     <ClCompile Include="Source\Resource\ResourceManager.ixx" />
     <ClCompile Include="Source\Resource\ResourceStorage.ixx" />
     <ClCompile Include="Source\Input\Windows\InputWindows.ixx" />
@@ -51,7 +51,7 @@
     <ClCompile Include="Source\App\Windows\WindowsApi.cpp" />
     <ClCompile Include="Source\App\Windows\MutexWindows.cpp" />
     <ClCompile Include="Source\App\Windows\AppWindows.cpp" />
-    <ClCompile Include="Source\Factory\SystemFactoryWindows.cpp" />
+    <ClCompile Include="Source\Factory\Windows\SystemFactoryWindows.cpp" />
     <ClCompile Include="Source\Video\Render\Direct3D12\VideoDirect3D12.cpp" />
     <ClCompile Include="Source\Game.cpp" />
   </ItemGroup>
