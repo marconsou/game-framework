@@ -57,6 +57,7 @@
     <ClCompile Include="Source\Factory\SystemFactoryWindows.ixx" />
     <ClCompile Include="Source\Time\Timer.cpp" />
     <ClCompile Include="Source\Time\Timer.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D12\VideoDirect3D12.cpp" />
     <ClCompile Include="Source\Video\Video.ixx" />
     <ClCompile Include="Source\Video\VideoConfiguration.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D12\VideoDirect3D12.ixx" />

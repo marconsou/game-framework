@@ -52,6 +52,7 @@
     <ClCompile Include="Source\App\Windows\MutexWindows.cpp" />
     <ClCompile Include="Source\App\Windows\AppWindows.cpp" />
     <ClCompile Include="Source\Factory\SystemFactoryWindows.cpp" />
+    <ClCompile Include="Source\Video\Render\Direct3D12\VideoDirect3D12.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt" />
