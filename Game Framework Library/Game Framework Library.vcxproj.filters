@@ -17,8 +17,8 @@
     <ClCompile Include="Source\App\App.ixx" />
     <ClCompile Include="Source\App\AppConfiguration.ixx" />
     <ClCompile Include="Source\App\AppNotification.ixx" />
-    <ClCompile Include="Source\SystemFactory.ixx" />
-    <ClCompile Include="Source\SystemFactoryWindows.ixx" />
+    <ClCompile Include="Source\Factory\SystemFactory.ixx" />
+    <ClCompile Include="Source\Factory\SystemFactoryWindows.ixx" />
     <ClCompile Include="Source\Resource\ResourceManager.ixx" />
     <ClCompile Include="Source\Resource\ResourceStorage.ixx" />
     <ClCompile Include="Source\Input\Windows\InputWindows.ixx" />
@@ -38,7 +38,7 @@
     <ClCompile Include="Source\Video\VideoSystem.ixx" />
     <ClCompile Include="Source\App\EntryPoint.ixx" />
     <ClCompile Include="Source\Game.ixx" />
-    <ClCompile Include="Source\VideoDirect3D12.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D12\VideoDirect3D12.ixx" />
     <ClCompile Include="Source\Video\Color\Color.ixx" />
     <ClCompile Include="Source\Video\Color\ColorPalette.ixx" />
     <ClCompile Include="Source\System\Log.cpp" />
@@ -51,6 +51,7 @@
     <ClCompile Include="Source\App\Windows\WindowsApi.cpp" />
     <ClCompile Include="Source\App\Windows\MutexWindows.cpp" />
     <ClCompile Include="Source\App\Windows\AppWindows.cpp" />
+    <ClCompile Include="Source\Factory\SystemFactoryWindows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt" />

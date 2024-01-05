@@ -2,8 +2,9 @@ import <format>;
 import ColorPalette;
 import EntryPoint;
 import GameApp;
-
+import Color;
 import DateTime;
+import Log;
 
 using namespace std;
 using namespace gfl;
@@ -11,6 +12,8 @@ using namespace gfl;
 int EntryPoint::Main()
 {
 	const auto date = DateTime::GetDate();
+	const auto time = DateTime::GetTime();
+	//Log::Warning("Teste");
 	GameApp game;
 	return game.App->OnRun([&]
 	{ 
