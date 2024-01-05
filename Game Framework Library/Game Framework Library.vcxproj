@@ -18,6 +18,7 @@
     <ClCompile Include="Source\App\Windows\MutexWindows.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsApi.cpp" />
     <ClCompile Include="Source\Factory\SystemFactoryWindows.cpp" />
+    <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Input\Windows\InputWindows.cpp" />
     <ClCompile Include="Source\Input\Windows\KeyboardWindows.cpp" />
     <ClCompile Include="Source\Input\Windows\MouseWindows.cpp" />
