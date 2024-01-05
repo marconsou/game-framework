@@ -11,8 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\App.ixx" />
-    <ClCompile Include="Source\AppConfiguration.ixx" />
+    <ClCompile Include="Source\App\App.ixx" />
+    <ClCompile Include="Source\App\AppConfiguration.ixx" />
+    <ClCompile Include="Source\App\Windows\AppWindows.cpp" />
+    <ClCompile Include="Source\App\Windows\CrtDebugLogWindows.cpp" />
+    <ClCompile Include="Source\App\Windows\MutexWindows.cpp" />
+    <ClCompile Include="Source\App\Windows\WindowsApi.cpp" />
     <ClCompile Include="Source\Input\Windows\InputWindows.cpp" />
     <ClCompile Include="Source\Input\Windows\KeyboardWindows.cpp" />
     <ClCompile Include="Source\Input\Windows\MouseWindows.cpp" />
@@ -20,17 +24,17 @@
     <ClCompile Include="Source\System\Log.cpp" />
     <ClCompile Include="Source\Time\Clock.cpp" />
     <ClCompile Include="Source\Time\DateTime.cpp" />
-    <ClCompile Include="Source\EntryPoint.ixx" />
-    <ClCompile Include="Source\AppNotification.ixx" />
-    <ClCompile Include="Source\AppWindows.cpp" />
-    <ClCompile Include="Source\AppWindows.ixx" />
+    <ClCompile Include="Source\App\EntryPoint.ixx" />
+    <ClCompile Include="Source\App\AppNotification.ixx" />
+    <ClCompile Include="Source\App\Windows\MainWindows.cpp" />
+    <ClCompile Include="Source\App\Windows\AppWindows.ixx" />
     <ClCompile Include="Source\Time\Clock.ixx" />
     <ClCompile Include="Source\Video\Color\Color.cpp" />
     <ClCompile Include="Source\Video\Color\Color.ixx" />
     <ClCompile Include="Source\Video\Color\ColorPalette.ixx" />
-    <ClCompile Include="Source\CrtDebugLogWindows.ixx" />
+    <ClCompile Include="Source\App\Windows\CrtDebugLogWindows.ixx" />
     <ClCompile Include="Source\Time\DateTime.ixx" />
-    <ClCompile Include="Source\DeviceStateNotification.ixx" />
+    <ClCompile Include="Source\Video\DeviceStateNotification.ixx" />
     <ClCompile Include="Source\System\File.ixx" />
     <ClCompile Include="Source\Game.ixx" />
     <ClCompile Include="Source\Input\Input.ixx" />
@@ -43,20 +47,20 @@
     <ClCompile Include="Source\Input\Mouse.ixx" />
     <ClCompile Include="Source\Input\MouseButton.ixx" />
     <ClCompile Include="Source\Input\Windows\MouseWindows.ixx" />
-    <ClCompile Include="Source\MutexWindows.ixx" />
-    <ClCompile Include="Source\ResourceManager.ixx" />
-    <ClCompile Include="Source\ResourceStorage.ixx" />
+    <ClCompile Include="Source\App\Windows\MutexWindows.ixx" />
+    <ClCompile Include="Source\Resource\ResourceManager.ixx" />
+    <ClCompile Include="Source\Resource\ResourceStorage.ixx" />
     <ClCompile Include="Source\Time\StepTimer.cpp" />
     <ClCompile Include="Source\Time\StepTimer.ixx" />
     <ClCompile Include="Source\SystemFactory.ixx" />
     <ClCompile Include="Source\SystemFactoryWindows.ixx" />
     <ClCompile Include="Source\Time\Timer.cpp" />
     <ClCompile Include="Source\Time\Timer.ixx" />
-    <ClCompile Include="Source\Video.ixx" />
-    <ClCompile Include="Source\VideoConfiguration.ixx" />
+    <ClCompile Include="Source\Video\Video.ixx" />
+    <ClCompile Include="Source\Video\VideoConfiguration.ixx" />
     <ClCompile Include="Source\VideoDirect3D12.ixx" />
-    <ClCompile Include="Source\VideoSystem.ixx" />
-    <ClCompile Include="Source\WindowsApi.ixx" />
+    <ClCompile Include="Source\Video\VideoSystem.ixx" />
+    <ClCompile Include="Source\App\Windows\WindowsApi.ixx" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="License\DirectX-Headers.txt" />

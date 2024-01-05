@@ -1,4 +1,5 @@
 TimerManagement, FPSTime and Interval (StepTimer).
 App sleep.
+Resource base class (Concepts for ResourceStorage?)
 ResourceStorage shared_ptr and weak_ptr.
 https://gameprogrammingpatterns.com/game-loop.html
