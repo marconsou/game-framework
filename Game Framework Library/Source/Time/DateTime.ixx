@@ -9,5 +9,7 @@ export namespace gfl
 	public:
 		static std::string GetDate();
 		static std::string GetTime();
+	private:
+		static std::string FormatData(std::string_view format);
 	};
 }
