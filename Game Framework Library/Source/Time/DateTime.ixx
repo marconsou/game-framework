@@ -7,8 +7,7 @@ export namespace gfl
 	class DateTime
 	{
 	public:
-		DateTime();
-		std::string GetDate() const;
-		std::string GetTime() const;
+		static std::string GetDate();
+		static std::string GetTime();
 	};
 }
