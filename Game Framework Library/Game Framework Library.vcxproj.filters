@@ -11,6 +11,9 @@
     <ClCompile Include="Source\Time\Clock.ixx" />
     <ClCompile Include="Source\Time\Clock.cpp" />
     <ClCompile Include="Source\Log\Log.ixx" />
+    <ClCompile Include="Source\Log\LogFile.ixx" />
+    <ClCompile Include="Source\Log\LogFile.cpp" />
+    <ClCompile Include="Source\Log\LogCallback.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />

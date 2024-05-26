@@ -7,6 +7,6 @@ export namespace gfl
 	class LogCallback
 	{
 	public:
-		virtual void OnLogError(std::string_view message) = 0;
+		virtual void OnLogError(std::string_view message) const = 0;
 	};
 }
