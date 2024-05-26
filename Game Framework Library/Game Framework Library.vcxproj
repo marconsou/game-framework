@@ -90,7 +90,7 @@
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Log.ixx" />
+    <ClCompile Include="Source\Log\Log.ixx" />
     <ClCompile Include="Source\Time\Clock.cpp" />
     <ClCompile Include="Source\Time\Clock.ixx" />
     <ClCompile Include="Source\Time\DateTime.cpp" />

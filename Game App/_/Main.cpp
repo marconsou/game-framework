@@ -4,6 +4,7 @@
 
 #include "Game.h"
 
+import Clock;
 import DateTime;
 
 
@@ -37,9 +38,9 @@ extern "C"
 // Entry point
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
-    gfl::DateTime a;
-    const auto d = a.GetDate();
-    const auto t = a.GetTime();
+    const auto d = DateTime::GetDate();
+    const auto t = DateTime::GetTime();
+    const auto time = Clock::GetTotalMilliseconds();
 
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
