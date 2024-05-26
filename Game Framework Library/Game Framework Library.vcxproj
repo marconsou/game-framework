@@ -95,6 +95,9 @@
     <ClCompile Include="Source\Time\DateTime.cpp" />
     <ClCompile Include="Source\Time\DateTime.ixx" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
