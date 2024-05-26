@@ -10,6 +10,7 @@
     <ClCompile Include="Source\Time\DateTime.cpp" />
     <ClCompile Include="Source\Time\Clock.ixx" />
     <ClCompile Include="Source\Time\Clock.cpp" />
+    <ClCompile Include="Log.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
