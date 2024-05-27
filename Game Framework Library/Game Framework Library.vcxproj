@@ -96,6 +96,8 @@
     <ClCompile Include="Source\Video\Color\Color.ixx" />
     <ClCompile Include="Source\Video\Color\ColorPalette.ixx" />
     <ClCompile Include="Source\Video\DeviceNotify.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.cpp" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.ixx" />
     <ClCompile Include="Source\Video\Video.ixx" />
     <ClCompile Include="Source\Video\VideoConfiguration.ixx" />
     <ClCompile Include="Source\Video\VideoSystem.ixx" />
