@@ -1,6 +1,8 @@
 #ifndef DIRECT3D11_H
 #define DIRECT3D11_H
 
+#include "../../../App/Windows/WindowsCompact.h"
+
 #include <d3d11_4.h>
 #include <dxgi1_6.h>
 

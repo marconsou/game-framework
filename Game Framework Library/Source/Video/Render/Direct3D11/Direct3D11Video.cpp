@@ -1,7 +1,6 @@
 module;
 
-#include "../../../App/Windows/WindowsCompact.h"
-#include "Direct3D11.h"
+//#include "Direct3D11.h"
 
 module Direct3D11Video;
 
