@@ -92,6 +92,9 @@
     <ClCompile Include="Source\Time\Clock.ixx" />
     <ClCompile Include="Source\Time\DateTime.cpp" />
     <ClCompile Include="Source\Time\DateTime.ixx" />
+    <ClCompile Include="Source\Video\Color\Color.cpp" />
+    <ClCompile Include="Source\Video\Color\Color.ixx" />
+    <ClCompile Include="Source\Video\Color\ColorPalette.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
