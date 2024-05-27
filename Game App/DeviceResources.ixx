@@ -8,13 +8,15 @@ module;
 
 export module DeviceResources;
 
+import DeviceNotify;
+
 //import "D:/Downloads/Game Framework/Game Framework Library/Source/App/Windows/WindowsCompact.h";
 //import "D:/Downloads/Game Framework/Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h";
 
 export namespace gfl
 {
 	// Provides an interface for an application that owns DeviceResources to be notified of the device being lost or created.
-	class IDeviceNotify
+	/*class IDeviceNotify
 	{
 	public:
 		virtual void OnDeviceLost() = 0;
@@ -22,7 +24,7 @@ export namespace gfl
 
 	protected:
 		~IDeviceNotify() = default;
-	};
+	};*/
 
 	// Controls all the DirectX device resources.
 	class DeviceResources
@@ -50,7 +52,7 @@ export namespace gfl
 		void SetWindow(HWND window, int width, int height) noexcept;
 		bool WindowSizeChanged(int width, int height);
 		void HandleDeviceLost();
-		void RegisterDeviceNotify(IDeviceNotify* deviceNotify) noexcept { m_deviceNotify = deviceNotify; }
+		void RegisterDeviceNotify(DeviceNotify* deviceNotify) noexcept { m_deviceNotify = deviceNotify; }
 		void Present();
 		void UpdateColorSpace();
 
@@ -127,6 +129,6 @@ export namespace gfl
 		unsigned int                                    m_options;
 
 		// The IDeviceNotify can be held directly as it owns the DeviceResources.
-		IDeviceNotify* m_deviceNotify;
+		DeviceNotify* m_deviceNotify;
 	};
 }

@@ -2,12 +2,13 @@ export module Game;
 
 import std;
 import DeviceResources;
+import DeviceNotify;
 import StepTimer;
 import "D:/Documents/Development/Visual Studio/Game Framework/Game Framework Library/Source/App/Windows/WindowsCompact.h";
 
 export namespace gfl
 {
-    class Game final : public IDeviceNotify
+    class Game final : public DeviceNotify
     {
     public:
 
@@ -44,7 +45,7 @@ export namespace gfl
 
     private:
 
-        void Update(gfl::StepTimer const& timer);
+        void Update(StepTimer const& timer);
         void Render();
 
         void Clear();
@@ -53,7 +54,7 @@ export namespace gfl
         void CreateWindowSizeDependentResources();
 
         // Device resources.
-        std::unique_ptr<gfl::DeviceResources>    m_deviceResources;
+        std::unique_ptr<DeviceResources>    m_deviceResources;
 
         // Rendering loop timer.
         gfl::StepTimer                           m_timer;

@@ -20,6 +20,7 @@
     <ClCompile Include="Source\Video\Video.ixx" />
     <ClCompile Include="Source\Video\VideoConfiguration.ixx" />
     <ClCompile Include="Source\Video\VideoSystem.ixx" />
+    <ClCompile Include="Source\Video\DeviceNotify.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
