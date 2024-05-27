@@ -63,7 +63,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -81,19 +81,16 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="_\DeviceResources.cpp" />
+    <ClCompile Include="_\DeviceResources.ixx" />
     <ClCompile Include="_\Game.cpp" />
+    <ClCompile Include="_\Game.ixx" />
     <ClCompile Include="_\Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="_\DeviceResources.h" />
-    <ClInclude Include="_\Game.h" />
-    <ClInclude Include="_\Headers.h" />
-    <ClInclude Include="_\StepTimer.h" />
+    <ClCompile Include="_\StepTimer.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game Framework Library\Game Framework Library.vcxproj">

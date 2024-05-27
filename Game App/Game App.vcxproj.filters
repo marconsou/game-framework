@@ -4,11 +4,8 @@
     <ClCompile Include="_\DeviceResources.cpp" />
     <ClCompile Include="_\Game.cpp" />
     <ClCompile Include="_\Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="_\DeviceResources.h" />
-    <ClInclude Include="_\Game.h" />
-    <ClInclude Include="_\Headers.h" />
-    <ClInclude Include="_\StepTimer.h" />
+    <ClCompile Include="_\DeviceResources.ixx" />
+    <ClCompile Include="_\StepTimer.ixx" />
+    <ClCompile Include="_\Game.ixx" />
   </ItemGroup>
 </Project>
