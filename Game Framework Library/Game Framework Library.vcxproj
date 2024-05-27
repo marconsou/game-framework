@@ -86,6 +86,12 @@
   <ItemGroup>
     <ClCompile Include="Source\File\File.cpp" />
     <ClCompile Include="Source\File\File.ixx" />
+    <ClCompile Include="Source\Input\Input.ixx" />
+    <ClCompile Include="Source\Input\InputState.ixx" />
+    <ClCompile Include="Source\Input\Keyboard.ixx" />
+    <ClCompile Include="Source\Input\KeyboardKey.ixx" />
+    <ClCompile Include="Source\Input\Mouse.ixx" />
+    <ClCompile Include="Source\Input\MouseButton.ixx" />
     <ClCompile Include="Source\Log\Log.ixx" />
     <ClCompile Include="Source\Log\LogCallback.ixx" />
     <ClCompile Include="Source\Log\LogFile.cpp" />

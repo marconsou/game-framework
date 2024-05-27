@@ -29,6 +29,12 @@
     <ClCompile Include="Source\File\File.cpp" />
     <ClCompile Include="Source\Time\StepTimer.ixx" />
     <ClCompile Include="Source\Time\StepTimer.cpp" />
+    <ClCompile Include="Source\Input\Input.ixx" />
+    <ClCompile Include="Source\Input\InputState.ixx" />
+    <ClCompile Include="Source\Input\Keyboard.ixx" />
+    <ClCompile Include="Source\Input\KeyboardKey.ixx" />
+    <ClCompile Include="Source\Input\Mouse.ixx" />
+    <ClCompile Include="Source\Input\MouseButton.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
