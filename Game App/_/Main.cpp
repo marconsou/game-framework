@@ -2,10 +2,15 @@
 // Main.cpp
 //
 
-#include "Game.h"
+//#include "Game.h"
 
+#include "../../Game Framework Library/Source/App/Windows/WindowsCompact.h"
+#include "../../Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h"
+
+import std;
 import Clock;
 import DateTime;
+import Game;
 
 
 using namespace DirectX;
