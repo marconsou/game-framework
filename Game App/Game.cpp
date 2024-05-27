@@ -6,7 +6,7 @@
 
 module;
 
-#include "../../Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h"
+#include "../Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h"
 
 module Game;
 

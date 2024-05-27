@@ -79,12 +79,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="_\DeviceResources.cpp" />
-    <ClCompile Include="_\DeviceResources.ixx" />
-    <ClCompile Include="_\Game.cpp" />
-    <ClCompile Include="_\Game.ixx" />
-    <ClCompile Include="_\Main.cpp" />
-    <ClCompile Include="_\StepTimer.ixx" />
+    <ClCompile Include="DeviceResources.cpp" />
+    <ClCompile Include="DeviceResources.ixx" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Game.ixx" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="StepTimer.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game Framework Library\Game Framework Library.vcxproj">

@@ -1,8 +1,8 @@
 module;
 
 //#include "Headers.h"
-#include "../../Game Framework Library/Source/App/Windows/WindowsCompact.h"
-#include "../../Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h"
+#include "../Game Framework Library/Source/App/Windows/WindowsCompact.h"
+#include "../Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h"
 //#include "D:/Downloads/Game Framework/Game Framework Library/Source/App/Windows/WindowsCompact.h"
 //#include "D:/Downloads/Game Framework/Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h"
 
