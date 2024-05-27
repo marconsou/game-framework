@@ -84,8 +84,8 @@
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\File\File.cpp" />
-    <ClCompile Include="Source\File\File.ixx" />
+    <ClCompile Include="Source\Stream\File.cpp" />
+    <ClCompile Include="Source\Stream\File.ixx" />
     <ClCompile Include="Source\Input\Input.ixx" />
     <ClCompile Include="Source\Input\InputState.ixx" />
     <ClCompile Include="Source\Input\Keyboard.ixx" />
