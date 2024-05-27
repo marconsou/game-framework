@@ -4,6 +4,8 @@ module;
 
 module DateTime;
 
+import std;
+
 namespace gfl
 {
 	std::string DateTime::GetDate()
