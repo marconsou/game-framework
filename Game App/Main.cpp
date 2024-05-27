@@ -43,9 +43,10 @@ extern "C"
 // Entry point
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
-    const auto d = DateTime::GetDate();
-    const auto t = DateTime::GetTime();
-    const auto time = Clock::GetTotalMilliseconds();
+    const auto date = DateTime::GetDate();
+    const auto ttime = DateTime::GetTime();
+    const auto tms = Clock::GetTotalMilliseconds();
+    const auto ts = Clock::GetTotalSeconds();
 
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
