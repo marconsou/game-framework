@@ -84,6 +84,8 @@
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\File\File.cpp" />
+    <ClCompile Include="Source\File\File.ixx" />
     <ClCompile Include="Source\Log\Log.ixx" />
     <ClCompile Include="Source\Log\LogCallback.ixx" />
     <ClCompile Include="Source\Log\LogFile.cpp" />

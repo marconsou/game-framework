@@ -25,6 +25,8 @@
     <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.cpp" />
     <ClCompile Include="Source\Time\Timer.ixx" />
     <ClCompile Include="Source\Time\Timer.cpp" />
+    <ClCompile Include="Source\File\File.ixx" />
+    <ClCompile Include="Source\File\File.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
