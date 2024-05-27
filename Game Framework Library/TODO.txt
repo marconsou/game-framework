@@ -1,6 +1,7 @@
 Clock.cpp <chrono>
 DateTime.cpp <chrono>
 Timer.cpp <chrono>
+WindowsApi.cpp WindowsCompact.h
 
 Old:
 TimerManagement, FPSTime and Interval (StepTimer).
