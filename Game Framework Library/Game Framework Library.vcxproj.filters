@@ -35,9 +35,21 @@
     <ClCompile Include="Source\Input\KeyboardKey.ixx" />
     <ClCompile Include="Source\Input\Mouse.ixx" />
     <ClCompile Include="Source\Input\MouseButton.ixx" />
+    <ClCompile Include="Source\Input\Windows\InputWindows.cpp" />
+    <ClCompile Include="Source\Input\Windows\InputWindows.ixx" />
+    <ClCompile Include="Source\Input\Windows\KeyboardWindows.cpp" />
+    <ClCompile Include="Source\Input\Windows\KeyboardWindows.ixx" />
+    <ClCompile Include="Source\Input\Windows\MouseWindows.cpp" />
+    <ClCompile Include="Source\Input\Windows\MouseWindows.ixx" />
+    <ClCompile Include="Source\App\EntryPoint.ixx" />
+    <ClCompile Include="Source\App\Windows\WindowsApi.ixx" />
+    <ClCompile Include="Source\App\AppConfiguration.ixx" />
+    <ClCompile Include="Source\App\Windows\WindowsApi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
     <ClInclude Include="Source\Video\Render\Direct3D11\Direct3D11.h" />
+    <ClInclude Include="Source\Input\Windows\DirectXTKKeyboard.h" />
+    <ClInclude Include="Source\Input\Windows\DirectXTKMouse.h" />
   </ItemGroup>
 </Project>
