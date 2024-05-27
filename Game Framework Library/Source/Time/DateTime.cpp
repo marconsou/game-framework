@@ -27,10 +27,7 @@ namespace gfl
 		{
 			atexit([]()
 			{
-#pragma warning( push )
-#pragma warning( disable : 26457)
 				std::chrono::get_tzdb_list().~tzdb_list();
-#pragma warning( pop ) 
 			});
 			registerOnce = true;
 		}
