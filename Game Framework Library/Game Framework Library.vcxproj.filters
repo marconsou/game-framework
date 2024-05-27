@@ -27,6 +27,8 @@
     <ClCompile Include="Source\Time\Timer.cpp" />
     <ClCompile Include="Source\File\File.ixx" />
     <ClCompile Include="Source\File\File.cpp" />
+    <ClCompile Include="Source\Time\StepTimer.ixx" />
+    <ClCompile Include="Source\Time\StepTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />

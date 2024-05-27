@@ -57,6 +57,6 @@ export namespace gfl
         std::unique_ptr<DeviceResources>    m_deviceResources;
 
         // Rendering loop timer.
-        gfl::StepTimer                           m_timer;
+        StepTimer                           m_timer;
     };
 }
