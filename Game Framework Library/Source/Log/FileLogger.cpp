@@ -4,7 +4,7 @@ import DateTime;
 
 namespace gfl
 {
-	FileLogger::FileLogger(const LogCallback* logCallback) : logCallback{logCallback}
+	FileLogger::FileLogger(const LogNotify* logNotify) : logNotify{logNotify}
 	{
 
 	}
@@ -17,8 +17,8 @@ namespace gfl
 	void FileLogger::Error(std::string_view message)
 	{
 		this->WriteData("Error", message);
-		if (this->logCallback)
-			this->logCallback->OnLogError(message);
+		if (this->logNotify)
+			this->logNotify->OnLogError(message);
 	}
 
 	void FileLogger::WriteData(std::string_view type, std::string_view message)
