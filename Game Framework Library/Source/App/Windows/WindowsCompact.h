@@ -19,5 +19,6 @@
 #include <Windows.h>
 
 #include <wrl/client.h>
+#include <wrl/wrappers/corewrappers.h>
 
 #endif

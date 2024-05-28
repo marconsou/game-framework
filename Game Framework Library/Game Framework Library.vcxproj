@@ -86,8 +86,13 @@
   <ItemGroup>
     <ClCompile Include="Source\App\AppConfiguration.ixx" />
     <ClCompile Include="Source\App\EntryPoint.ixx" />
+    <ClCompile Include="Source\App\Windows\CrtDebug.cpp" />
+    <ClCompile Include="Source\App\Windows\CrtDebug.ixx" />
     <ClCompile Include="Source\App\Windows\WindowsApi.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsApi.ixx" />
+    <ClCompile Include="Source\App\Windows\WindowsMain.cpp" />
+    <ClCompile Include="Source\App\Windows\WindowsMutex.cpp" />
+    <ClCompile Include="Source\App\Windows\WindowsMutex.ixx" />
     <ClCompile Include="Source\Input\Windows\InputWindows.cpp" />
     <ClCompile Include="Source\Input\Windows\InputWindows.ixx" />
     <ClCompile Include="Source\Input\Windows\KeyboardWindows.cpp" />
@@ -125,6 +130,7 @@
     <ClCompile Include="Source\Video\VideoSystem.ixx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\App\Windows\CrtDebug.h" />
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
     <ClInclude Include="Source\Input\Windows\DirectXTKKeyboard.h" />
     <ClInclude Include="Source\Input\Windows\DirectXTKMouse.h" />
