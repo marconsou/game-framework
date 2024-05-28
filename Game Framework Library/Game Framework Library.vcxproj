@@ -93,10 +93,10 @@
     <ClCompile Include="Source\App\Windows\WindowsMain.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsMutex.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsMutex.ixx" />
-    <ClCompile Include="Source\Input\Windows\InputWindows.cpp" />
-    <ClCompile Include="Source\Input\Windows\InputWindows.ixx" />
-    <ClCompile Include="Source\Input\Windows\KeyboardWindows.cpp" />
-    <ClCompile Include="Source\Input\Windows\KeyboardWindows.ixx" />
+    <ClCompile Include="Source\Input\Windows\WindowsInput.cpp" />
+    <ClCompile Include="Source\Input\Windows\WindowsInput.ixx" />
+    <ClCompile Include="Source\Input\Windows\WindowsKeyboard.cpp" />
+    <ClCompile Include="Source\Input\Windows\WindowsKeyboard.ixx" />
     <ClCompile Include="Source\Input\Windows\WindowsMouse.cpp" />
     <ClCompile Include="Source\Input\Windows\WindowsMouse.ixx" />
     <ClCompile Include="Source\Stream\File.cpp" />

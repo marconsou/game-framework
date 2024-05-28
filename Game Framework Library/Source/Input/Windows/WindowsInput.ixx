@@ -1,15 +1,15 @@
-export module InputWindows;
+export module WindowsInput;
 
 import Input;
-import KeyboardWindows;
-import MouseWindows;
+import WindowsKeyboard;
+import WindowsMouse;
 
 export namespace gfl
 {
-	class InputWindows : public Input
+	class WindowsInput : public Input
 	{
 	public:
-		InputWindows() = default;
+		WindowsInput() = default;
 		int GetMouseX() const override;
 		int GetMouseY() const override;
 		int GetMouseScrollWheel() const override;
@@ -17,7 +17,7 @@ export namespace gfl
 		bool IsMouseButton(MouseButton button, InputState state) override;
 		void Update() override;
 	private:
-		KeyboardWindows keyboard;
-		MouseWindows mouse;
+		WindowsKeyboard keyboard;
+		WindowsMouse mouse;
 	};
 }
