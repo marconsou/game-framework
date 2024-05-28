@@ -11,8 +11,8 @@
     <ClCompile Include="Source\Time\Clock.ixx" />
     <ClCompile Include="Source\Time\Clock.cpp" />
     <ClCompile Include="Source\Log\Log.ixx" />
-    <ClCompile Include="Source\Log\LogFile.ixx" />
-    <ClCompile Include="Source\Log\LogFile.cpp" />
+    <ClCompile Include="Source\Log\FileLogger.ixx" />
+    <ClCompile Include="Source\Log\FileLogger.cpp" />
     <ClCompile Include="Source\Log\LogCallback.ixx" />
     <ClCompile Include="Source\Video\Color\Color.ixx" />
     <ClCompile Include="Source\Video\Color\Color.cpp" />
