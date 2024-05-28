@@ -1,10 +1,10 @@
-module MouseWindows;
+module WindowsMouse;
 
 import WindowsApi;
 
 namespace gfl
 {
-	MouseWindows::MouseWindows()
+	WindowsMouse::WindowsMouse()
 	{
 		this->device.SetWindow(WindowsApi::GetHandleWindow());
 		this->states[InputState::Pressed] = DirectX::Mouse::ButtonStateTracker::PRESSED;
@@ -12,27 +12,27 @@ namespace gfl
 		this->states[InputState::Holding] = DirectX::Mouse::ButtonStateTracker::HELD;
 	}
 
-	int MouseWindows::GetX() const
+	int WindowsMouse::GetX() const
 	{
 		return this->device.GetState().x;
 	}
 
-	int MouseWindows::GetY() const
+	int WindowsMouse::GetY() const
 	{
 		return this->device.GetState().y;
 	}
 
-	int MouseWindows::GetScrollWheel() const
+	int WindowsMouse::GetScrollWheel() const
 	{
 		return this->device.GetState().scrollWheelValue;
 	}
 
-	bool MouseWindows::IsMouseButton(MouseButton button, InputState state)
+	bool WindowsMouse::IsMouseButton(MouseButton button, InputState state)
 	{
 		return this->buttons[button] == this->states[state];
 	}
 
-	void MouseWindows::Update()
+	void WindowsMouse::Update()
 	{
 		this->tracker.Update(this->device.GetState());
 
@@ -43,7 +43,7 @@ namespace gfl
 		this->buttons[MouseButton::XButton2] = this->tracker.xButton2;
 	}
 
-	void MouseWindows::ProcessMessage(UINT message, WPARAM wParam, LPARAM lParam)
+	void WindowsMouse::ProcessMessage(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		DirectX::Mouse::ProcessMessage(message, wParam, lParam);
 	}

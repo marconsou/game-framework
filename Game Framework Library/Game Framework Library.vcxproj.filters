@@ -39,8 +39,8 @@
     <ClCompile Include="Source\Input\Windows\InputWindows.ixx" />
     <ClCompile Include="Source\Input\Windows\KeyboardWindows.cpp" />
     <ClCompile Include="Source\Input\Windows\KeyboardWindows.ixx" />
-    <ClCompile Include="Source\Input\Windows\MouseWindows.cpp" />
-    <ClCompile Include="Source\Input\Windows\MouseWindows.ixx" />
+    <ClCompile Include="Source\Input\Windows\WindowsMouse.cpp" />
+    <ClCompile Include="Source\Input\Windows\WindowsMouse.ixx" />
     <ClCompile Include="Source\App\EntryPoint.ixx" />
     <ClCompile Include="Source\App\Windows\WindowsApi.ixx" />
     <ClCompile Include="Source\App\AppConfiguration.ixx" />

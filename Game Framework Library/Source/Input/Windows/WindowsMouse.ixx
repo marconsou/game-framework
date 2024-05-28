@@ -1,4 +1,4 @@
-export module MouseWindows;
+export module WindowsMouse;
 
 import std;
 import Mouse;
@@ -6,10 +6,10 @@ import "DirectXTKMouse.h";
 
 export namespace gfl
 {
-	class MouseWindows : public Mouse
+	class WindowsMouse : public Mouse
 	{
 	public:
-		MouseWindows();
+		WindowsMouse();
 		int GetX() const override;
 		int GetY() const override;
 		int GetScrollWheel() const override;
