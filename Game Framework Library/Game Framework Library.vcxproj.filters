@@ -13,7 +13,7 @@
     <ClCompile Include="Source\Log\Log.ixx" />
     <ClCompile Include="Source\Log\FileLogger.ixx" />
     <ClCompile Include="Source\Log\FileLogger.cpp" />
-    <ClCompile Include="Source\Log\LogCallback.ixx" />
+    <ClCompile Include="Source\Log\LogNotify.ixx" />
     <ClCompile Include="Source\Video\Color\Color.ixx" />
     <ClCompile Include="Source\Video\Color\Color.cpp" />
     <ClCompile Include="Source\Video\Color\ColorPalette.ixx" />

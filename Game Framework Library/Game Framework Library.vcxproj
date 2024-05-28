@@ -108,7 +108,7 @@
     <ClCompile Include="Source\Input\Mouse.ixx" />
     <ClCompile Include="Source\Input\MouseButton.ixx" />
     <ClCompile Include="Source\Log\Log.ixx" />
-    <ClCompile Include="Source\Log\LogCallback.ixx" />
+    <ClCompile Include="Source\Log\LogNotify.ixx" />
     <ClCompile Include="Source\Log\FileLogger.cpp" />
     <ClCompile Include="Source\Log\FileLogger.ixx" />
     <ClCompile Include="Source\Time\Clock.cpp" />
