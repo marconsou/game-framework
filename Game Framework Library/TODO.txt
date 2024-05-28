@@ -1,4 +1,5 @@
 IntelliSense issue on cpp files
+GetWindowDimension Resize
 
 Old:
 TimerManagement, FPSTime and Interval (StepTimer).
