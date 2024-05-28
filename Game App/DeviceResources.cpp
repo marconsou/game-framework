@@ -123,7 +123,7 @@ namespace gfl
 		m_outputSize{0, 0, 1, 1},
 		m_colorSpace(DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709),
 		m_options(flags | c_FlipPresent),
-		m_deviceNotify(nullptr)
+		videoNotify(nullptr)
 	{
 	}
 
@@ -462,9 +462,9 @@ namespace gfl
 	// Recreate all device resources and set them back to the current state.
 	void DeviceResources::HandleDeviceLost()
 	{
-		if (m_deviceNotify)
+		if (this->videoNotify)
 		{
-			m_deviceNotify->OnDeviceLost();
+			this->videoNotify->OnDeviceLost();
 		}
 
 		m_d3dDepthStencilView.Reset();
@@ -491,9 +491,9 @@ namespace gfl
 		CreateDeviceResources();
 		CreateWindowSizeDependentResources();
 
-		if (m_deviceNotify)
+		if (this->videoNotify)
 		{
-			m_deviceNotify->OnDeviceRestored();
+			this->videoNotify->OnDeviceRestored();
 		}
 	}
 

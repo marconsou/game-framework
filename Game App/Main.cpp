@@ -10,7 +10,9 @@
 import std;
 import Clock;
 import DateTime;
+import EntryPoint;
 import Game;
+import WindowsApi;
 
 
 using namespace DirectX;
@@ -33,23 +35,17 @@ LPCWSTR g_szAppName = L"Direct3D Win32 Game DR";
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 void ExitGame() noexcept;
 
-// Indicates to hybrid graphics systems to prefer the discrete part by default
-extern "C"
-{
-    __declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
-    __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
-}
-
 // Entry point
-int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
+//int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
+int EntryPoint::Main()
 {
     const auto date = DateTime::GetDate();
     const auto ttime = DateTime::GetTime();
     const auto tms = Clock::GetTotalMilliseconds();
     const auto ts = Clock::GetTotalSeconds();
 
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+    //UNREFERENCED_PARAMETER(hPrevInstance);
+    //UNREFERENCED_PARAMETER(lpCmdLine);
 
     if (!XMVerifyCPUSupport())
         return 1;
@@ -62,6 +58,8 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
     // Register class and create window
     {
+        const auto hInstance = GetModuleHandle(nullptr);
+
         // Register class
         WNDCLASSEXW wcex = {};
         wcex.cbSize = sizeof(WNDCLASSEXW);
@@ -71,7 +69,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         wcex.hIcon = LoadIconW(hInstance, L"IDI_ICON");
         wcex.hCursor = LoadCursorW(nullptr, IDC_ARROW);
         wcex.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
-        wcex.lpszClassName = L"Direct3D_Win32_Game_DRWindowClass";
+        wcex.lpszClassName = WindowsApi::GetExecutableId().data();
         wcex.hIconSm = LoadIconW(wcex.hInstance, L"IDI_ICON");
         if (!RegisterClassExW(&wcex))
             return 1;
@@ -84,7 +82,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
         AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-        HWND hwnd = CreateWindowExW(0, L"Direct3D_Win32_Game_DRWindowClass", g_szAppName, WS_OVERLAPPEDWINDOW,
+        HWND hwnd = CreateWindowExW(0, wcex.lpszClassName, g_szAppName, WS_OVERLAPPEDWINDOW,
             CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top,
             nullptr, nullptr, hInstance,
             g_game.get());
@@ -94,7 +92,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         if (!hwnd)
             return 1;
 
-        ShowWindow(hwnd, nCmdShow);
+        ShowWindow(hwnd, SW_SHOWDEFAULT/*nCmdShow*/);
         // TODO: Change nCmdShow to SW_SHOWMAXIMIZED to default to fullscreen.
 
         GetClientRect(hwnd, &rc);
