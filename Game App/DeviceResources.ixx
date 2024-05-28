@@ -8,7 +8,7 @@ module;
 
 export module DeviceResources;
 
-import VideoNotify;
+import DeviceNotify;
 
 //import "D:/Downloads/Game Framework/Game Framework Library/Source/App/Windows/WindowsCompact.h";
 //import "D:/Downloads/Game Framework/Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h";
@@ -52,7 +52,7 @@ export namespace gfl
 		void SetWindow(HWND window, int width, int height) noexcept;
 		bool WindowSizeChanged(int width, int height);
 		void HandleDeviceLost();
-		void RegisterDeviceNotify(VideoNotify* videoNotify) noexcept { this->videoNotify = videoNotify; }
+		void RegisterDeviceNotify(DeviceNotify* deviceNotify) noexcept { this->deviceNotify = deviceNotify; }
 		void Present();
 		void UpdateColorSpace();
 
@@ -129,6 +129,6 @@ export namespace gfl
 		unsigned int                                    m_options;
 
 		// The IDeviceNotify can be held directly as it owns the DeviceResources.
-		VideoNotify* videoNotify;
+		DeviceNotify* deviceNotify;
 	};
 }

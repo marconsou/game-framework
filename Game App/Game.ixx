@@ -3,12 +3,12 @@ export module Game;
 import std;
 import DeviceResources;
 import StepTimer;
-import VideoNotify;
+import DeviceNotify;
 import "D:/Documents/Development/Visual Studio/Game Framework/Game Framework Library/Source/App/Windows/WindowsCompact.h";
 
 export namespace gfl
 {
-    class Game final : public VideoNotify
+    class Game final : public DeviceNotify
     {
     public:
 
