@@ -50,6 +50,11 @@
     <ClCompile Include="Source\App\Windows\CrtDebug.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsMutex.ixx" />
     <ClCompile Include="Source\App\Windows\WindowsMutex.cpp" />
+    <ClCompile Include="Source\App\Windows\WindowsApp.ixx" />
+    <ClCompile Include="Source\App\AppNotify.ixx" />
+    <ClCompile Include="Source\App\App.ixx" />
+    <ClCompile Include="Source\App\Windows\WindowsApp.cpp" />
+    <ClCompile Include="Source\Video\DisplayNotify.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
