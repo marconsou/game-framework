@@ -41,7 +41,7 @@ namespace gfl
 
 		if (appConfiguration.Windowed)
 		{
-			windowStyle |= WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
+			windowStyle = !appConfiguration.Resize ? (WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX) : WS_OVERLAPPEDWINDOW;
 			if (AdjustWindowRectEx(&windowRect, windowStyle, false, 0))
 			{
 				windowRect.right -= windowRect.left;
