@@ -1,9 +1,8 @@
 IntelliSense issue on cpp files
-GetWindowDimension Resize
 
 Old:
-TimerManagement, FPSTime and Interval (StepTimer).
-App sleep.
+TimerManagement, FPSTime and Interval (StepTimer). 
+App sleep. https://www.mvps.org/directx/articles/writing_the_game_loop.htm
 Resource base class (Concepts for ResourceStorage?)
 ResourceStorage shared_ptr and weak_ptr.
 https://gameprogrammingpatterns.com/game-loop.html
