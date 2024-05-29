@@ -125,6 +125,7 @@ namespace gfl
 		m_options(flags | c_FlipPresent),
 		deviceNotify(nullptr)
 	{
+		XMVerifyCPUSupport();
 	}
 
 	// Configures the Direct3D device, and stores handles to it and the device context.

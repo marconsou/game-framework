@@ -12,7 +12,14 @@ module Game;
 
 //import "D:/Downloads/Game Framework/Game Framework Library/Source/Video/Render/Direct3D11/Direct3D11.h";
 
-extern void ExitGame() noexcept;
+import std;
+import Clock;
+import DateTime;
+import EntryPoint;
+import WindowsApi;
+import WindowsApp;
+import AppConfiguration;
+import FileLogger;
 
 using namespace DirectX;
 
@@ -20,13 +27,22 @@ using Microsoft::WRL::ComPtr;
 
 namespace gfl
 {
-	Game::Game() noexcept(false)
+	Game::Game() : appConfiguration{.Title = "Direct3D 11 App",.Width = 800,.Height = 600,  .Windowed = true, .Resize = true,.ShowCursor = false}
 	{
+		this->fileLogger = std::make_unique<FileLogger>(this);
+		//this->appConfiguration = std::make_unique({.Title = "Direct3D 11 App",.Width = 800,.Height = 600,  .Windowed = true, .Resize = false,.ShowCursor = true});
+		this->windowsApp = std::make_unique<WindowsApp>(this->appConfiguration, this,this->fileLogger.get());
+
 		m_deviceResources = std::make_unique<gfl::DeviceResources>();
 		// TODO: Provide parameters for swapchain format, depth/stencil format, and backbuffer count.
 		//   Add DX::DeviceResources::c_AllowTearing to opt-in to variable rate displays.
 		//   Add DX::DeviceResources::c_EnableHDR for HDR10 display.
 		m_deviceResources->RegisterDeviceNotify(this);
+
+		this->windowsApp->SetDisplayNotify(this);
+
+
+		this->Initialize(WindowsApi::GetHandleWindow(), appConfiguration.Width, appConfiguration.Height);
 	}
 
 	// Initialize the Direct3D resources required to run.
@@ -117,57 +133,70 @@ namespace gfl
 #pragma endregion
 
 #pragma region Message Handlers
-	// Message handlers
+
+	void Game::OnRun()
+	{
+		this->Tick();
+
+		this->windowsApp->SetTitle(std::format("{}fps {:.1f}s", this->m_timer.GetFramesPerSecond(), this->m_timer.GetTotalSeconds()));
+	}
+
 	void Game::OnActivated()
 	{
-		// TODO: Game is becoming active window.
+		OutputDebugString(L"\nOnActivated");
 	}
 
 	void Game::OnDeactivated()
 	{
-		// TODO: Game is becoming background window.
+		OutputDebugString(L"\nOnDeactivated");
 	}
 
 	void Game::OnSuspending()
 	{
-		// TODO: Game is being power-suspended (or minimized).
+		OutputDebugString(L"\nOnSuspending");
 	}
 
 	void Game::OnResuming()
 	{
 		m_timer.ResetElapsedTime();
 
-		// TODO: Game is being power-resumed (or returning from minimize).
+		OutputDebugString(L"\nOnResuming");
+	}
+
+	void Game::OnQuit()
+	{
+		OutputDebugString(L"\nOnQuit\n\n");
+		
 	}
 
 	void Game::OnWindowMoved()
 	{
 		auto const r = m_deviceResources->GetOutputSize();
 		m_deviceResources->WindowSizeChanged(r.right, r.bottom);
+
+		OutputDebugString(L"\nOnWindowMoved");
 	}
 
 	void Game::OnDisplayChange()
 	{
 		m_deviceResources->UpdateColorSpace();
+
+		OutputDebugString(L"\nOnDisplayChange");
 	}
 
 	void Game::OnWindowSizeChanged(int width, int height)
 	{
+		OutputDebugString(L"\nOnWindowSizeChanged [Begin]");
+
 		if (!m_deviceResources->WindowSizeChanged(width, height))
 			return;
 
 		CreateWindowSizeDependentResources();
 
 		// TODO: Game window is being resized.
+		OutputDebugString(L"\nOnWindowSizeChanged [End]");
 	}
 
-	// Properties
-	void Game::GetDefaultSize(int& width, int& height) const noexcept
-	{
-		// TODO: Change to desired default window size (note minimum size is 320x200).
-		width = 800;
-		height = 600;
-	}
 #pragma endregion
 
 #pragma region Direct3D Resources
