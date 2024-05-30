@@ -30,7 +30,7 @@ namespace gfl
 			registerOnce = true;
 		}
 #endif
-		const auto params = std::chrono::zoned_time{std::chrono::current_zone(), std::chrono::system_clock::now()};
+		const auto params{std::chrono::zoned_time{std::chrono::current_zone(), std::chrono::system_clock::now()}};
 		return std::vformat(format, std::make_format_args(params));
 	}
 }
