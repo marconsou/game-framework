@@ -14,5 +14,7 @@ export namespace gfl
 		static const HWND GetHandleWindow();
 		static std::optional<std::pair<DWORD, RECT>> GetWindowDimension(const AppConfiguration& appConfiguration);
 		static void RestoreApp();
+		static bool Succeeded(HRESULT result);
+		static bool Failed(HRESULT result);
 	};
 }

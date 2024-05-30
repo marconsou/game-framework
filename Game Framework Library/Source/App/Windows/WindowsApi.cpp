@@ -63,4 +63,14 @@ namespace gfl
 			SetForegroundWindow(handleWindow);
 		}
 	}
+
+	bool WindowsApi::Succeeded(HRESULT result)
+	{
+		return SUCCEEDED(result);
+	}
+
+	bool WindowsApi::Failed(HRESULT result)
+	{
+		return FAILED(result);
+	}
 }

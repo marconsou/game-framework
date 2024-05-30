@@ -16,7 +16,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	gfl::CrtDebug::EnableLog();
 
 	Microsoft::WRL::Wrappers::RoInitializeWrapper initialize{RO_INIT_MULTITHREADED};
-	if FAILED(initialize)
+	if (gfl::WindowsApi::Failed(initialize))
 		return EXIT_FAILURE;
 
 	const gfl::WindowsMutex mutex;
