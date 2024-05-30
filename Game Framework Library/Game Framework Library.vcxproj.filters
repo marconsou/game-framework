@@ -21,8 +21,6 @@
     <ClCompile Include="Source\Video\VideoConfiguration.ixx" />
     <ClCompile Include="Source\Video\VideoSystem.ixx" />
     <ClCompile Include="Source\Video\DeviceNotify.ixx" />
-    <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.ixx" />
-    <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.cpp" />
     <ClCompile Include="Source\Time\Timer.ixx" />
     <ClCompile Include="Source\Time\Timer.cpp" />
     <ClCompile Include="Source\Stream\File.ixx" />
@@ -55,6 +53,8 @@
     <ClCompile Include="Source\App\App.ixx" />
     <ClCompile Include="Source\App\Windows\WindowsApp.cpp" />
     <ClCompile Include="Source\Video\DisplayNotify.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
