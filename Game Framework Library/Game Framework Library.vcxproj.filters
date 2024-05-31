@@ -56,6 +56,10 @@
     <ClCompile Include="Source\Game.ixx" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Time\StepTimer.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D\Direct3DVideo.ixx" />
+    <ClCompile Include="Source\Video\VideoNotify.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D\Direct3DVideoAppNotify.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D\Direct3DVideoAppNotify.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
