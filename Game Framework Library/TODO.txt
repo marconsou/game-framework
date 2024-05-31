@@ -1,4 +1,5 @@
-IntelliSense issue on cpp files
+IntelliSense issue on cpp files.
+Device Lost/Restore solution.
 
 Old:
 TimerManagement, FPSTime and Interval (StepTimer). 
