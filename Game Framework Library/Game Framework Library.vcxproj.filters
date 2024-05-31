@@ -25,8 +25,6 @@
     <ClCompile Include="Source\Time\Timer.cpp" />
     <ClCompile Include="Source\Stream\File.ixx" />
     <ClCompile Include="Source\Stream\File.cpp" />
-    <ClCompile Include="Source\Time\StepTimer.ixx" />
-    <ClCompile Include="Source\Time\StepTimer.cpp" />
     <ClCompile Include="Source\Input\Input.ixx" />
     <ClCompile Include="Source\Input\InputState.ixx" />
     <ClCompile Include="Source\Input\Keyboard.ixx" />
@@ -55,6 +53,9 @@
     <ClCompile Include="Source\Video\DisplayNotify.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.cpp" />
+    <ClCompile Include="Source\Game.ixx" />
+    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\Time\StepTimer.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />

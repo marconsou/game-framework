@@ -97,6 +97,8 @@
     <ClCompile Include="Source\App\Windows\WindowsMain.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsMutex.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsMutex.ixx" />
+    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\Game.ixx" />
     <ClCompile Include="Source\Input\Windows\WindowsInput.cpp" />
     <ClCompile Include="Source\Input\Windows\WindowsInput.ixx" />
     <ClCompile Include="Source\Input\Windows\WindowsKeyboard.cpp" />
@@ -119,7 +121,6 @@
     <ClCompile Include="Source\Time\Clock.ixx" />
     <ClCompile Include="Source\Time\DateTime.cpp" />
     <ClCompile Include="Source\Time\DateTime.ixx" />
-    <ClCompile Include="Source\Time\StepTimer.cpp" />
     <ClCompile Include="Source\Time\StepTimer.ixx" />
     <ClCompile Include="Source\Time\Timer.cpp" />
     <ClCompile Include="Source\Time\Timer.ixx" />
