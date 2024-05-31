@@ -57,11 +57,17 @@ namespace gfl
 
 	void WindowsApi::RestoreApp()
 	{
-		if (const auto handleWindow = WindowsApi::GetHandleWindow())
+		if (const auto handleWindow{WindowsApi::GetHandleWindow()})
 		{
 			ShowWindow(handleWindow, SW_RESTORE);
 			SetForegroundWindow(handleWindow);
 		}
+	}
+
+	void WindowsApi::OutputDebug(std::string_view message)
+	{
+		const auto buffer{std::format(" [{}] ", message)};
+		OutputDebugString(std::wstring{buffer.begin(), buffer.end()}.c_str());
 	}
 
 	bool WindowsApi::Succeeded(HRESULT result)
