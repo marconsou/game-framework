@@ -81,10 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Game.ixx" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="StepTimer.ixx" />
+    <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game Framework Library\Game Framework Library.vcxproj">
