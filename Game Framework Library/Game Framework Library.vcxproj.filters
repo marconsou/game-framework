@@ -64,6 +64,7 @@
     <ClCompile Include="Source\Factory\Windows\WindowsSystemFactory.ixx" />
     <ClCompile Include="Source\Factory\Windows\WindowsSystemFactory.cpp" />
     <ClCompile Include="Source\Game\GameNotify.ixx" />
+    <ClCompile Include="Source\Time\StepTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />

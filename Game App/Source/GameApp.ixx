@@ -45,7 +45,13 @@ public:
 		{
 			float elapsedTime = float(this->timer.GetElapsedSeconds());
 
-			this->app->SetTitle(std::format("{}fps {:.1f}s", this->timer.GetFramesPerSecond(), this->timer.GetTotalSeconds()));
+			this->app->SetTitle(std::format("{}fps {:.1f}s {}es {}et {}fc {}tt", 
+				this->timer.GetFramesPerSecond(), 
+				this->timer.GetTotalSeconds(),
+				this->timer.GetElapsedSeconds(),
+				this->timer.GetElapsedTicks(),
+				this->timer.GetFrameCount(),
+				this->timer.GetTotalTicks()));
 		});
 
 		if (this->timer.GetFrameCount() == 0)
