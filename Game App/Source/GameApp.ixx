@@ -2,20 +2,14 @@ export module GameApp;
 
 import AppConfiguration;
 import ColorPalette;
-import Direct3D11Video;
-import FileLogger;
 import Game;
 import VideoConfiguration;
 import WindowsApi;
-import WindowsApp;
-import WindowsInput;
-
 import WindowsSystemFactory;
-import VideoSystem;
 
 using namespace gfl;
 
-export class GameApp final : public gfl::Game
+export class GameApp final : public Game
 {
 public:
 	GameApp()
