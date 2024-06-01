@@ -12,7 +12,8 @@ namespace gfl
 	Direct3D11Video::Direct3D11Video(const VideoConfiguration& videoConfiguration, DeviceNotify* deviceNotify, Log* log) :
 		videoConfiguration{videoConfiguration},
 		deviceNotify{deviceNotify},
-		log{log}
+		log{log},
+		direct3DDisplayEvent{this}
 	{
 		this->CheckForCPUFeatureSupport();
 		this->CreateDeviceResources();
@@ -24,10 +25,14 @@ namespace gfl
 		this->ReportDebug();
 	}
 
-	void Direct3D11Video::Render(const Color& clearColor)
+	void Direct3D11Video::SetVideoNotify(VideoNotify* videoNotify)
 	{
-		this->Clear(clearColor);
-		this->Present();
+		this->direct3DDisplayEvent.SetVideoNotify(videoNotify);
+	}
+
+	DisplayNotify* Direct3D11Video::GetDisplayNotify()
+	{
+		return &this->direct3DDisplayEvent;
 	}
 
 	void Direct3D11Video::CheckForCPUFeatureSupport()
@@ -464,6 +469,26 @@ namespace gfl
 		}
 	}
 
+	bool Direct3D11Video::WindowSizeChanged(std::optional<int> width, std::optional<int> height)
+	{
+		const auto newWidth{width.value_or(this->videoConfiguration.Width)};
+		const auto newHeight{height.value_or(this->videoConfiguration.Height)};
+		if (newWidth == this->videoConfiguration.Width && newHeight == this->videoConfiguration.Height)
+		{
+			this->UpdateColorSpace();
+			return false;
+		}
+
+		if (width.has_value())
+			this->videoConfiguration.Width = width.value();
+
+		if (height.has_value())
+			this->videoConfiguration.Height = height.value();
+
+		this->CreateWindowSizeDependentResources();
+		return true;
+	}
+
 	void Direct3D11Video::HandleDeviceLost()
 	{
 		if (this->deviceNotify)
@@ -486,6 +511,12 @@ namespace gfl
 
 		if (this->deviceNotify)
 			this->deviceNotify->OnDeviceRestored();
+	}
+
+	void Direct3D11Video::Render(const Color& clearColor)
+	{
+		this->Clear(clearColor);
+		this->Present();
 	}
 
 	void Direct3D11Video::Clear(const Color& clearColor)
@@ -535,26 +566,6 @@ namespace gfl
 			if (!this->dxgiFactory->IsCurrent())
 				this->UpdateColorSpace();
 		}
-	}
-
-	bool Direct3D11Video::WindowSizeChanged(std::optional<int> width, std::optional<int> height)
-	{
-		const auto newWidth{width.value_or(this->videoConfiguration.Width)};
-		const auto newHeight{height.value_or(this->videoConfiguration.Height)};
-		if (newWidth == this->videoConfiguration.Width && newHeight == this->videoConfiguration.Height)
-		{
-			this->UpdateColorSpace();
-			return false;
-		}
-
-		if (width.has_value())
-			this->videoConfiguration.Width = width.value();
-
-		if (height.has_value())
-			this->videoConfiguration.Height = height.value();
-
-		this->CreateWindowSizeDependentResources();
-		return true;
 	}
 
 	constexpr DXGI_FORMAT Direct3D11Video::NoSRGB(DXGI_FORMAT format)
