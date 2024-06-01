@@ -1,24 +1,17 @@
-module;
-
-#include <chrono> //IntelliSense
-
 module Clock;
+
+import std;
 
 namespace gfl
 {
 	std::chrono::milliseconds Clock::GetTotalMilliseconds()
 	{
-		return std::chrono::duration_cast<std::chrono::milliseconds>(Clock::GetTotalTime());
+		return Clock::GetTotalTime<std::chrono::milliseconds>();
 	}
 
 	std::chrono::seconds Clock::GetTotalSeconds()
 	{
-		return std::chrono::duration_cast<std::chrono::seconds>(Clock::GetTotalTime());
-	}
-
-	std::chrono::nanoseconds Clock::GetTotalTime()
-	{
-		return Clock::Now() - Clock::start;
+		return Clock::GetTotalTime<std::chrono::seconds>();
 	}
 
 	std::chrono::high_resolution_clock::time_point Clock::Now()
