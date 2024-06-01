@@ -25,6 +25,14 @@ namespace gfl
 		this->ReportDebug();
 	}
 
+	void Direct3D11Video::ResetResources()
+	{
+		this->renderTargetView.Reset();
+		this->depthStencilView.Reset();
+		this->renderTarget.Reset();
+		this->depthStencil.Reset();
+	}
+
 	void Direct3D11Video::SetVideoNotify(VideoNotify* videoNotify)
 	{
 		this->direct3DDisplayEvent.SetVideoNotify(videoNotify);
@@ -57,10 +65,7 @@ namespace gfl
 			this->log->Error("Invalid window handle!");
 
 		this->context->OMSetRenderTargets(0, nullptr, nullptr);
-		this->renderTargetView.Reset();
-		this->depthStencilView.Reset();
-		this->renderTarget.Reset();
-		this->depthStencil.Reset();
+		this->ResetResources();
 		this->context->Flush();
 
 		const auto backBufferWidth{static_cast<UINT>(this->videoConfiguration.Width)};
@@ -184,6 +189,8 @@ namespace gfl
 			if (WindowsApi::Failed(dxgiInfoQueue->AddStorageFilterEntries(DXGI_DEBUG_DXGI, &filter)))
 				this->log->Error("AddStorageFilterEntries");
 		}
+		else
+			this->log->Error("DXGIGetDebugInterface");
 
 		if (!debugDXGI)
 #endif
@@ -293,13 +300,13 @@ namespace gfl
 					this->log->Error("GetDesc");
 
 				if (desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE)
-				{
-					// Don't select the Basic Render Driver adapter.
 					continue;
-				}
+
 				break;
 			}
 		}
+		else
+			this->log->Error("IDXGIFactory");
 
 		if (!adapter)
 		{
@@ -310,10 +317,8 @@ namespace gfl
 					this->log->Error("GetDesc");
 
 				if (desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE)
-				{
-					// Don't select the Basic Render Driver adapter.
 					continue;
-				}
+
 				break;
 			}
 		}
@@ -435,6 +440,8 @@ namespace gfl
 					if (desc.ColorSpace == DXGI_COLOR_SPACE_RGB_FULL_G2084_NONE_P2020)
 						isDisplayHDR10 = true;
 				}
+				else
+					this->log->Error("IDXGIOutput");
 			}
 		}
 
@@ -466,7 +473,33 @@ namespace gfl
 				if (WindowsApi::Failed(swapChain3->SetColorSpace1(colorSpace)))
 					this->log->Error("SetColorSpace");
 			}
+			else
+				this->log->Error("CheckColorSpaceSupport");
 		}
+		else
+			this->log->Error("IDXGISwapChain");
+	}
+
+	void Direct3D11Video::HandleDeviceLost()
+	{
+		if (this->deviceNotify)
+			this->deviceNotify->OnDeviceLost();
+
+		this->ResetResources();
+
+		this->swapChain.Reset();
+		this->context.Reset();
+
+		this->ReportDebug();
+
+		this->device.Reset();
+		this->dxgiFactory.Reset();
+
+		this->CreateDeviceResources();
+		this->CreateWindowSizeDependentResources();
+
+		if (this->deviceNotify)
+			this->deviceNotify->OnDeviceRestored();
 	}
 
 	bool Direct3D11Video::WindowSizeChanged(std::optional<int> width, std::optional<int> height)
@@ -489,42 +522,11 @@ namespace gfl
 		return true;
 	}
 
-	void Direct3D11Video::HandleDeviceLost()
-	{
-		if (this->deviceNotify)
-			this->deviceNotify->OnDeviceLost();
-
-		this->depthStencilView.Reset();
-		this->renderTargetView.Reset();
-		this->renderTarget.Reset();
-		this->depthStencil.Reset();
-		this->swapChain.Reset();
-		this->context.Reset();
-
-		this->ReportDebug();
-
-		this->device.Reset();
-		this->dxgiFactory.Reset();
-
-		this->CreateDeviceResources();
-		this->CreateWindowSizeDependentResources();
-
-		if (this->deviceNotify)
-			this->deviceNotify->OnDeviceRestored();
-	}
-
-	void Direct3D11Video::Render(const Color& clearColor)
-	{
-		this->Clear(clearColor);
-		this->Present();
-	}
-
 	void Direct3D11Video::Clear(const Color& clearColor)
 	{
 		this->context->ClearRenderTargetView(this->renderTargetView.Get(), &clearColor.GetFloat4()[0]);
 		this->context->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		this->context->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), this->depthStencilView.Get());
-
 		this->context->RSSetViewports(1, &this->screenViewport);
 	}
 
@@ -566,6 +568,12 @@ namespace gfl
 			if (!this->dxgiFactory->IsCurrent())
 				this->UpdateColorSpace();
 		}
+	}
+
+	void Direct3D11Video::Render(const Color& clearColor)
+	{
+		this->Clear(clearColor);
+		this->Present();
 	}
 
 	constexpr DXGI_FORMAT Direct3D11Video::NoSRGB(DXGI_FORMAT format)

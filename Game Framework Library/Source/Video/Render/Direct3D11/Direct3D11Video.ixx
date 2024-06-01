@@ -22,9 +22,6 @@ export namespace gfl
 		~Direct3D11Video();
 		void SetVideoNotify(VideoNotify* videoNotify);
 		DisplayNotify* GetDisplayNotify();
-		void Render(const Color& clearColor) override;
-		void UpdateColorSpace() override;
-		bool WindowSizeChanged(std::optional<int> width = std::nullopt, std::optional<int> height = std::nullopt) override;
 	private:
 		bool flipPresent{true};
 		bool allowTearing{true};
@@ -46,6 +43,7 @@ export namespace gfl
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencil;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
+		void ResetResources();
 		void CheckForCPUFeatureSupport();
 		void CreateDeviceResources();
 		void CreateWindowSizeDependentResources();
@@ -56,9 +54,12 @@ export namespace gfl
 		void GetHardwareAdapter(IDXGIAdapter1** ppAdapter);
 		void CreateDebug();
 		void ReportDebug();
+		void UpdateColorSpace() override;
 		void HandleDeviceLost();
+		bool WindowSizeChanged(std::optional<int> width = std::nullopt, std::optional<int> height = std::nullopt) override;
 		void Clear(const Color& clearColor);
 		void Present();
+		void Render(const Color& clearColor) override;
 		constexpr static DXGI_FORMAT NoSRGB(DXGI_FORMAT format);
 		constexpr static long ComputeIntersectionArea(long ax1, long ay1, long ax2, long ay2, long bx1, long by1, long bx2, long by2);
 	};

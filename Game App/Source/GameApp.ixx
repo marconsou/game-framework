@@ -44,24 +44,28 @@ public:
 		this->timer.Tick([&]()
 		{
 			float elapsedTime = float(this->timer.GetElapsedSeconds());
+
+			this->app->SetTitle(std::format("{}fps {:.1f}s", this->timer.GetFramesPerSecond(), this->timer.GetTotalSeconds()));
 		});
 
 		if (this->timer.GetFrameCount() == 0)
 			return;
 
 		this->video->Render(ColorPalette::CornflowerBlue);
-
-		this->app->SetTitle(std::format("{}fps {:.1f}s", this->timer.GetFramesPerSecond(), this->timer.GetTotalSeconds()));
 	}
 
 	void OnActivated()
 	{
 		WindowsApi::OutputDebug("OnActivated");
+		this->timer.SetFixedTimeStep(true);
+		this->timer.SetTargetElapsedSeconds(1.0 / 120);
 	}
 
 	void OnDeactivated()
 	{
 		WindowsApi::OutputDebug("OnDeactivated");
+		this->timer.SetFixedTimeStep(true);
+		this->timer.SetTargetElapsedSeconds(1.0 / 15);
 	}
 
 	void OnSuspending()

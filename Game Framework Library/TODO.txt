@@ -6,5 +6,8 @@ TimerManagement, FPSTime and Interval (StepTimer).
 App sleep. https://www.mvps.org/directx/articles/writing_the_game_loop.htm
 Resource base class (Concepts for ResourceStorage?)
 ResourceStorage shared_ptr and weak_ptr.
+
+Links:
 https://gameprogrammingpatterns.com/game-loop.html
 https://www.vinjn.com/awesome-d3d12/
+https://paminerva.github.io/
