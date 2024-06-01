@@ -1,9 +1,9 @@
 import std;
 import EntryPoint;
-import Game;
+import GameApp;
 
 int gfl::EntryPoint::Main()
 {
-	std::unique_ptr<gfl::Game> game = std::make_unique<gfl::Game>();
-	return game->App->Run();
+	auto game = std::make_unique<GameApp>();
+	return game->Start();
 }
