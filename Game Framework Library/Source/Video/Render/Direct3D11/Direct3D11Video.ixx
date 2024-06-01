@@ -60,7 +60,7 @@ export namespace gfl
 		void Clear(const Color& clearColor);
 		void Present();
 		void Render(const Color& clearColor) override;
-		constexpr static DXGI_FORMAT NoSRGB(DXGI_FORMAT format);
-		constexpr static long ComputeIntersectionArea(long ax1, long ay1, long ax2, long ay2, long bx1, long by1, long bx2, long by2);
+		static constexpr DXGI_FORMAT NoSRGB(DXGI_FORMAT format);
+		static constexpr long ComputeIntersectionArea(long ax1, long ay1, long ax2, long ay2, long bx1, long by1, long bx2, long by2);
 	};
 }
