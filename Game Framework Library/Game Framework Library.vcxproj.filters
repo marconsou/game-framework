@@ -53,13 +53,17 @@
     <ClCompile Include="Source\Video\DisplayNotify.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Direct3D11Video.cpp" />
-    <ClCompile Include="Source\Game.ixx" />
-    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\Game\Game.ixx" />
+    <ClCompile Include="Source\Game\Game.cpp" />
     <ClCompile Include="Source\Time\StepTimer.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D\Direct3DVideo.ixx" />
     <ClCompile Include="Source\Video\VideoNotify.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D\Direct3DDisplayEvent.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D\Direct3DDisplayEvent.cpp" />
+    <ClCompile Include="Source\Factory\SystemFactory.ixx" />
+    <ClCompile Include="Source\Factory\Windows\WindowsSystemFactory.ixx" />
+    <ClCompile Include="Source\Factory\Windows\WindowsSystemFactory.cpp" />
+    <ClCompile Include="Source\Game\GameNotify.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />

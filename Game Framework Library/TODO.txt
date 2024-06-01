@@ -1,4 +1,4 @@
-IntelliSense issue on cpp files.
+IntelliSense issue on cpp files. WindowsSystemFactory.cpp IntelliSense
 Device Lost/Restore solution.
 
 Old:

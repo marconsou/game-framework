@@ -97,8 +97,12 @@
     <ClCompile Include="Source\App\Windows\WindowsMain.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsMutex.cpp" />
     <ClCompile Include="Source\App\Windows\WindowsMutex.ixx" />
-    <ClCompile Include="Source\Game.cpp" />
-    <ClCompile Include="Source\Game.ixx" />
+    <ClCompile Include="Source\Factory\SystemFactory.ixx" />
+    <ClCompile Include="Source\Factory\Windows\WindowsSystemFactory.cpp" />
+    <ClCompile Include="Source\Factory\Windows\WindowsSystemFactory.ixx" />
+    <ClCompile Include="Source\Game\Game.cpp" />
+    <ClCompile Include="Source\Game\Game.ixx" />
+    <ClCompile Include="Source\Game\GameNotify.ixx" />
     <ClCompile Include="Source\Input\Windows\WindowsInput.cpp" />
     <ClCompile Include="Source\Input\Windows\WindowsInput.ixx" />
     <ClCompile Include="Source\Input\Windows\WindowsKeyboard.cpp" />
