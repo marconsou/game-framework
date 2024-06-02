@@ -51,9 +51,39 @@ namespace gfl
 		return this->framesPerSecond;
 	}
 
-	std::int64_t StepTimer::GetTicks()
+	int64_t StepTimer::GetTicks() const
 	{
-		return Clock::GetTotalTime<std::chrono::duration<std::int64_t, std::ratio<1, 10'000'000l>>>().count();
+		return this->timer.GetTime<std::chrono::duration<int64_t, std::ratio<1, 10'000'000l>>>().count();
+	}
+
+	void StepTimer::Start()
+	{
+		this->timer.Start();
+	}
+
+	void StepTimer::Stop()
+	{
+		this->timer.Stop();
+	}
+
+	void StepTimer::Pause()
+	{
+		this->timer.Pause();
+	}
+
+	void StepTimer::Resume()
+	{
+		this->timer.Resume();
+	}
+
+	bool StepTimer::IsStarted() const
+	{
+		return this->timer.IsStarted();
+	}
+
+	bool StepTimer::IsPaused() const
+	{
+		return this->timer.IsPaused();
 	}
 
 	void StepTimer::ResetElapsedTime()
@@ -82,7 +112,7 @@ namespace gfl
 		const auto lastFrameCount{this->frameCount};
 		if (this->isFixedTimeStep)
 		{
-			// Fixed timestep update logic
+			// Fixed timestep update logic.
 			// If the app is running very close to the target elapsed time (within 1/4 of a millisecond) just clamp the clock to exactly match the target value. This prevents tiny and irrelevant errors
 			// from accumulating over time. Without this clamping, a game that requested a 60 fps fixed update, running with vsync enabled on a 59.94 NTSC display, would eventually
 			// accumulate enough tiny errors that it would drop a frame. It is better to just round small deviations down to zero to leave things running smoothly.

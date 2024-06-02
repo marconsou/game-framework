@@ -1,8 +1,8 @@
 export module StepTimer;
 
 import std;
-import Clock;
 import StepTimerNotify;
+import Timer;
 
 export namespace gfl
 {
@@ -18,10 +18,17 @@ export namespace gfl
 		double GetTotalSeconds() const;
 		std::uint32_t GetFrameCount() const;
 		std::uint32_t GetFramesPerSecond() const;
+		void Start();
+		void Stop();
+		void Pause();
+		void Resume();
+		bool IsStarted() const;
+		bool IsPaused() const;
 		void ResetElapsedTime();
 		void Tick(StepTimerNotify* stepTimerNotify);
 	private:
 		bool isFixedTimeStep{};
+		Timer timer;
 		std::int64_t lastTime{StepTimer::GetTicks()};
 		std::uint64_t targetElapsedTicks{StepTimer::TicksPerSecond / 60};
 		std::uint64_t elapsedTicks;
@@ -32,7 +39,7 @@ export namespace gfl
 		std::uint32_t framesThisSecond;
 		std::uint64_t secondCounter;
 		static constexpr std::uint64_t TicksPerSecond{10'000'000};
-		static std::int64_t GetTicks();
+		std::int64_t GetTicks() const;
 		static constexpr double TicksToSeconds(std::uint64_t ticks);
 		static constexpr std::uint64_t SecondsToTicks(double seconds);
 	};
