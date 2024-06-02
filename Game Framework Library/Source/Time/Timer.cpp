@@ -4,8 +4,6 @@ module;
 
 module Timer;
 
-import Clock;
-
 namespace gfl
 {
 	std::chrono::milliseconds Timer::GetMilliseconds() const

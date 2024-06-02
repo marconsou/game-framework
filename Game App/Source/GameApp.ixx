@@ -7,6 +7,8 @@ import VideoConfiguration;
 import WindowsApi;
 import WindowsSystemFactory;
 
+import Timer;
+
 using namespace gfl;
 
 export class GameApp final : public Game
@@ -32,24 +34,49 @@ public:
 			this->timer.SetFixedTimeStep(true);
 			this->timer.SetTargetElapsedSeconds(1.0 / 60);
 		}
-	}
 
+		//this->timer.Start();
+	}
+	Timer t;
 	void Update()
 	{
 		float elapsedTime = float(this->timer.GetElapsedSeconds());
 
-		this->app->SetTitle(std::format("{}fps {:.1f}s {}es {}et {}fc {}tt",
+		this->app->SetTitle(std::format("{}fps {:.1f}s {}es {}et {}fc {}tt >> {}",
 			this->timer.GetFramesPerSecond(),
 			this->timer.GetTotalSeconds(),
 			this->timer.GetElapsedSeconds(),
 			this->timer.GetElapsedTicks(),
 			this->timer.GetFrameCount(),
-			this->timer.GetTotalTicks()));
+			this->timer.GetTotalTicks(), this->t.GetTime<std::chrono::seconds>()));
 	}
 
 	void OnRun()
 	{
 		this->input->Update();
+
+		if (this->input->IsKeyboardKey(KeyboardKey::O, InputState::Pressed))
+		{
+			if (t.IsStarted())
+				t.Stop();
+			else
+				t.Start();
+
+			/*
+			if (this->t.IsPaused())
+				this->t.Resume();
+			else
+				this->t.Pause();
+			*/
+		}
+
+		if (this->input->IsKeyboardKey(KeyboardKey::P, InputState::Pressed))
+		{
+			if (t.IsPaused())
+				t.Resume();
+			else
+				t.Pause();
+		}
 
 		if (this->input->IsKeyboardKey(KeyboardKey::Escape, InputState::Released) || this->input->IsMouseButton(MouseButton::Right, InputState::Released))
 			this->app->Quit();
@@ -67,6 +94,11 @@ public:
 		WindowsApi::OutputDebug("OnActivated");
 		this->timer.SetFixedTimeStep(true);
 		this->timer.SetTargetElapsedSeconds(1.0 / 120);
+
+		if (!this->timer.IsStarted())
+			this->timer.Start();
+		else
+			this->timer.Resume();
 	}
 
 	void OnDeactivated()
@@ -74,6 +106,8 @@ public:
 		WindowsApi::OutputDebug("OnDeactivated");
 		this->timer.SetFixedTimeStep(true);
 		this->timer.SetTargetElapsedSeconds(1.0 / 15);
+
+		this->timer.Pause();
 	}
 
 	void OnSuspending()
