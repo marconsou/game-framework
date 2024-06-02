@@ -5,11 +5,12 @@ import GameNotify;
 import Input;
 import Log;
 import StepTimer;
+import StepTimerNotify;
 import Video;
 
 export namespace gfl
 {
-	class Game : public GameNotify
+	class Game : public GameNotify, public StepTimerNotify
 	{
 	public:
 		Game() = default;

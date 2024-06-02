@@ -127,6 +127,7 @@
     <ClCompile Include="Source\Time\DateTime.ixx" />
     <ClCompile Include="Source\Time\StepTimer.cpp" />
     <ClCompile Include="Source\Time\StepTimer.ixx" />
+    <ClCompile Include="Source\Time\StepTimerNotify.ixx" />
     <ClCompile Include="Source\Time\Timer.cpp" />
     <ClCompile Include="Source\Time\Timer.ixx" />
     <ClCompile Include="Source\Video\Color\Color.cpp" />
