@@ -8,44 +8,59 @@ import Clock;
 
 namespace gfl
 {
-	Timer::Timer() : startTime{Clock::GetTotalMilliseconds()}
+	std::chrono::milliseconds Timer::GetMilliseconds() const
 	{
-
+		return this->GetTime<std::chrono::milliseconds>();
 	}
 
-	int64_t Timer::GetMilliseconds() const
+	std::chrono::seconds Timer::GetSeconds() const
 	{
-		return this->GetTime().count();
+		return this->GetTime<std::chrono::seconds>();
 	}
 
-	double Timer::GetSeconds() const
+	void Timer::Start()
 	{
-		return std::chrono::duration<double>(this->GetTime()).count();
+		this->started = true;
+		this->paused = false;
+		this->startTime = Clock::GetTotalTime();
+		this->pauseTime = std::chrono::nanoseconds::zero();
 	}
 
-	bool Timer::IsPaused() const
+	void Timer::Stop()
 	{
-		return this->isPaused;
+		this->started = false;
+		this->paused = false;
+		this->startTime = std::chrono::nanoseconds::zero();
+		this->pauseTime = std::chrono::nanoseconds::zero();
 	}
 
 	void Timer::Pause()
 	{
-		if (!this->isPaused)
-			this->pauseTime = Clock::GetTotalMilliseconds() - this->startTime;
-
-		this->isPaused = true;
+		if (this->started && !this->paused)
+		{
+			this->paused = true;
+			this->pauseTime = Clock::GetTotalTime() - this->startTime;
+			this->startTime = std::chrono::nanoseconds::zero();
+		}
 	}
 
 	void Timer::Resume()
 	{
-		if (this->isPaused)
-			this->startTime = Clock::GetTotalMilliseconds() - this->pauseTime;
-
-		this->isPaused = false;
+		if (this->started && this->paused)
+		{
+			this->paused = false;
+			this->startTime = Clock::GetTotalTime() - this->pauseTime;
+			this->pauseTime = std::chrono::nanoseconds::zero();
+		}
 	}
 
-	std::chrono::milliseconds Timer::GetTime() const
+	bool Timer::IsStarted() const
 	{
-		return !this->isPaused ? (Clock::GetTotalMilliseconds() - this->startTime) : this->pauseTime;
+		return this->started;
+	}
+
+	bool Timer::IsPaused() const
+	{
+		return this->paused && this->started;
 	}
 }
