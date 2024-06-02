@@ -1,3 +1,7 @@
+module;
+
+#include <chrono> //IntelliSense
+
 export module Timer;
 
 import std;
