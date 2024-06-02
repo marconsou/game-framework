@@ -34,6 +34,19 @@ public:
 		}
 	}
 
+	void Update()
+	{
+		float elapsedTime = float(this->timer.GetElapsedSeconds());
+
+		this->app->SetTitle(std::format("{}fps {:.1f}s {}es {}et {}fc {}tt",
+			this->timer.GetFramesPerSecond(),
+			this->timer.GetTotalSeconds(),
+			this->timer.GetElapsedSeconds(),
+			this->timer.GetElapsedTicks(),
+			this->timer.GetFrameCount(),
+			this->timer.GetTotalTicks()));
+	}
+
 	void OnRun()
 	{
 		this->input->Update();
@@ -41,18 +54,7 @@ public:
 		if (this->input->IsKeyboardKey(KeyboardKey::Escape, InputState::Released) || this->input->IsMouseButton(MouseButton::Right, InputState::Released))
 			this->app->Quit();
 
-		this->timer.Tick([&]()
-		{
-			float elapsedTime = float(this->timer.GetElapsedSeconds());
-
-			this->app->SetTitle(std::format("{}fps {:.1f}s {}es {}et {}fc {}tt", 
-				this->timer.GetFramesPerSecond(), 
-				this->timer.GetTotalSeconds(),
-				this->timer.GetElapsedSeconds(),
-				this->timer.GetElapsedTicks(),
-				this->timer.GetFrameCount(),
-				this->timer.GetTotalTicks()));
-		});
+		this->timer.Tick(this);
 
 		if (this->timer.GetFrameCount() == 0)
 			return;
