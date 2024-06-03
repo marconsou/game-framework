@@ -8,6 +8,7 @@ Resource base class (Concepts for ResourceStorage?)
 ResourceStorage shared_ptr and weak_ptr.
 
 Links:
+https://gamedev.stackexchange.com/questions/49779/different-shaders-for-different-objects-directx-11
 https://gameprogrammingpatterns.com/game-loop.html
 https://www.vinjn.com/awesome-d3d12/
 https://paminerva.github.io/
