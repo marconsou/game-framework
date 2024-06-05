@@ -1,5 +1,7 @@
 IntelliSense issue on cpp files. WindowsSystemFactory.cpp IntelliSense
 Device Lost/Restore solution.
+Pipeline Order, Transparent/Opaque Order and Sprite Batching.
+Pipeline State, Material, Managers (Shader and Texture).
 
 Old:
 TimerManagement, FPSTime and Interval (StepTimer). 
@@ -12,3 +14,4 @@ https://gamedev.stackexchange.com/questions/49779/different-shaders-for-differen
 https://gameprogrammingpatterns.com/game-loop.html
 https://www.vinjn.com/awesome-d3d12/
 https://paminerva.github.io/
+https://alain.xyz/blog/raw-directx11#pipeline-state

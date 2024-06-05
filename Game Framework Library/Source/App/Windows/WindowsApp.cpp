@@ -196,6 +196,9 @@ namespace gfl
 		case WM_ACTIVATEAPP:
 			if (app && app->appNotify)
 			{
+				WindowsKeyboard::ProcessMessage(message, wParam, lParam);
+				WindowsMouse::ProcessMessage(message, wParam, lParam);
+
 				if (wParam)
 					app->appNotify->OnActivated();
 				else
