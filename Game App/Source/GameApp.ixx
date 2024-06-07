@@ -16,9 +16,7 @@ using namespace gfl;
 export class GameApp final : public Game
 {
 public:
-	Timer t;
-	std::unique_ptr<ShaderManager> shaderManager;
-
+	Timer localTimer;
 	GameApp()
 	{
 		const AppConfiguration appConfiguration{.Title = "Game App",.Width = 800,.Height = 600,  .Windowed = true, .Resize = true,.ShowCursor = true};
@@ -30,9 +28,7 @@ public:
 		this->app = factory.CreateApp(appConfiguration);
 		this->video = factory.CreateVideo(videoConfiguration, VideoSystem::Direct3D11);
 		this->input = factory.CreateInput();
-
-		this->shaderManager = std::make_unique<Direct3D11ShaderManager>(static_cast<Direct3D11Video*>(this->video.get()), this->log.get());
-		this->shaderManager->LoadVertexShader("VertexShader", "D:/Documents/Development/Visual Studio/Game Framework/x64/Debug/VertexShader.cso", VertexFormat::PositionColor);
+		this->shaderManager = factory.CreateShaderManager();
 
 		this->CreateDeviceDependentResources();
 		this->CreateWindowSizeDependentResources();
@@ -56,7 +52,7 @@ public:
 			this->timer.GetElapsedSeconds(),
 			this->timer.GetElapsedTicks(),
 			this->timer.GetFrameCount(),
-			this->timer.GetTotalTicks(), this->t.GetTime<std::chrono::seconds>()));
+			this->timer.GetTotalTicks(), this->localTimer.GetTime<std::chrono::seconds>()));
 	}
 
 	void OnRun()
@@ -65,25 +61,18 @@ public:
 
 		if (this->input->IsKeyboardKey(KeyboardKey::O, InputState::Pressed))
 		{
-			if (t.IsStarted())
-				t.Stop();
+			if (localTimer.IsStarted())
+				localTimer.Stop();
 			else
-				t.Start();
-
-			/*
-			if (this->t.IsPaused())
-				this->t.Resume();
-			else
-				this->t.Pause();
-			*/
+				localTimer.Start();
 		}
 
 		if (this->input->IsKeyboardKey(KeyboardKey::P, InputState::Pressed))
 		{
-			if (t.IsPaused())
-				t.Resume();
+			if (localTimer.IsPaused())
+				localTimer.Resume();
 			else
-				t.Pause();
+				localTimer.Pause();
 		}
 
 		if (this->input->IsKeyboardKey(KeyboardKey::Escape, InputState::Released) || this->input->IsMouseButton(MouseButton::Right, InputState::Released))
@@ -100,8 +89,8 @@ public:
 	void OnActivated()
 	{
 		WindowsApi::OutputDebug("OnActivated");
-		this->timer.SetFixedTimeStep(true);
-		this->timer.SetTargetElapsedSeconds(1.0 / 120);
+		//this->timer.SetFixedTimeStep(true);
+		//this->timer.SetTargetElapsedSeconds(1.0 / 120);
 
 		if (!this->timer.IsStarted())
 			this->timer.Start();
@@ -112,8 +101,8 @@ public:
 	void OnDeactivated()
 	{
 		WindowsApi::OutputDebug("OnDeactivated");
-		this->timer.SetFixedTimeStep(true);
-		this->timer.SetTargetElapsedSeconds(1.0 / 15);
+		//this->timer.SetFixedTimeStep(true);
+		//this->timer.SetTargetElapsedSeconds(1.0 / 15);
 
 		this->timer.Pause();
 	}
@@ -149,6 +138,8 @@ public:
 	{
 		// These are the resources that depend on the device.
 		// TODO: Initialize device dependent objects here (independent of window size).
+		this->shaderManager->LoadVertexShader("VertexShader", "D:/Documents/Development/Visual Studio/Game Framework/x64/Debug/VertexShader.cso", VertexFormat::PositionColor);
+		this->shaderManager->LoadPixelShader("PixelShader", "D:/Documents/Development/Visual Studio/Game Framework/x64/Debug/PixelShader.cso");
 	}
 
 	void CreateWindowSizeDependentResources() override

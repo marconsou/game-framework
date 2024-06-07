@@ -20,7 +20,7 @@ export namespace gfl
 
 		const T* Get(std::string_view resourceName) const
 		{
-			const auto element = this->resources.find(resourceName.data());
+			const auto element{this->resources.find(resourceName.data())};
 			return element != this->resources.end() ? element->second.get() : nullptr;
 		}
 
