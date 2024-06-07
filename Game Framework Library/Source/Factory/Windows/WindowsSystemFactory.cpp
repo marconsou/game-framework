@@ -1,6 +1,6 @@
 module WindowsSystemFactory;
 
-import Direct3D11Video;
+import Direct3D11ShaderManager;
 import FileLogger;
 import GameNotify;
 import WindowsInput;
@@ -37,6 +37,7 @@ namespace gfl
 		if (videoSystem == VideoSystem::Direct3D11)
 		{
 			auto direct3D11Video{std::make_unique<Direct3D11Video>(configuration, this->gameNotify, this->log)};
+			this->direct3D11Video = direct3D11Video.get();
 			this->windowsApp->SetDisplayNotify(direct3D11Video->GetDisplayNotify());
 			direct3D11Video->SetVideoNotify(this->gameNotify);
 			return direct3D11Video;
@@ -47,5 +48,12 @@ namespace gfl
 	std::unique_ptr<Input> WindowsSystemFactory::CreateInput()
 	{
 		return std::make_unique<WindowsInput>();
+	}
+
+	std::unique_ptr<ShaderManager> WindowsSystemFactory::CreateShaderManager()
+	{
+		if (this->direct3D11Video)
+			return std::make_unique<Direct3D11ShaderManager>(this->direct3D11Video, this->log);
+		return nullptr;
 	}
 }

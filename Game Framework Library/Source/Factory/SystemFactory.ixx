@@ -5,6 +5,7 @@ import App;
 import AppConfiguration;
 import Input;
 import Log;
+import ShaderManager;
 import Video;
 import VideoConfiguration;
 import VideoSystem;
@@ -24,5 +25,6 @@ export namespace gfl
 		virtual std::unique_ptr<App> CreateApp(const AppConfiguration& appConfiguration) = 0;
 		virtual std::unique_ptr<Video> CreateVideo(const VideoConfiguration& videoConfiguration, VideoSystem videoSystem) = 0;
 		virtual std::unique_ptr<Input> CreateInput() = 0;
+		virtual std::unique_ptr<ShaderManager> CreateShaderManager() = 0;
 	};
 }
