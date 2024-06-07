@@ -74,6 +74,8 @@
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11VertexShader.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11VertexShader.cpp" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11Shader.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11PixelShader.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11PixelShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />

@@ -137,6 +137,8 @@
     <ClCompile Include="Source\Video\Color\ColorPalette.ixx" />
     <ClCompile Include="Source\Video\DeviceNotify.ixx" />
     <ClCompile Include="Source\Video\DisplayNotify.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11PixelShader.cpp" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11PixelShader.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11Shader.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11ShaderManager.cpp" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11ShaderManager.ixx" />
