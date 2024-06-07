@@ -4,6 +4,7 @@ import App;
 import GameNotify;
 import Input;
 import Log;
+import ShaderManager;
 import StepTimer;
 import StepTimerNotify;
 import Video;
@@ -25,6 +26,7 @@ export namespace gfl
 		std::unique_ptr<App> app;
 		std::unique_ptr<Video> video;
 		std::unique_ptr<Input> input;
+		std::unique_ptr<ShaderManager> shaderManager;
 		StepTimer timer;
 		virtual void OnResuming() override;
 		virtual void OnDeviceRestored() override;
