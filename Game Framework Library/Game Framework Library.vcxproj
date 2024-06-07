@@ -110,6 +110,7 @@
     <ClCompile Include="Source\Input\Windows\WindowsMouse.cpp" />
     <ClCompile Include="Source\Input\Windows\WindowsMouse.ixx" />
     <ClCompile Include="Source\Resource\Manager\ShaderManager.ixx" />
+    <ClCompile Include="Source\Resource\ResourceStorage.ixx" />
     <ClCompile Include="Source\Resource\Shader.ixx" />
     <ClCompile Include="Source\Stream\File.cpp" />
     <ClCompile Include="Source\Stream\File.ixx" />

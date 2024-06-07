@@ -76,6 +76,7 @@
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11Shader.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11PixelShader.ixx" />
     <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11PixelShader.cpp" />
+    <ClCompile Include="Source\Resource\ResourceStorage.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
