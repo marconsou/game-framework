@@ -83,7 +83,7 @@
     <ClInclude Include="Source\Video\Render\Direct3D11\Direct3D11.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\VertexShader.hlsl" />
-    <FxCompile Include="Shader\PixelShader.hlsl" />
+    <FxCompile Include="Shader\HLSL\VertexShader.hlsl" />
+    <FxCompile Include="Shader\HLSL\PixelShader.hlsl" />
   </ItemGroup>
 </Project>
