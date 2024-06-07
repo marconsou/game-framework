@@ -1,8 +1,11 @@
+module;
+
+#include "DirectXTKKeyboard.h"
+
 export module WindowsKeyboard;
 
 import std;
 import Keyboard;
-import "DirectXTKKeyboard.h";
 
 export namespace gfl
 {

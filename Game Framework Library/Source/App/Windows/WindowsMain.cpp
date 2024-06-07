@@ -1,8 +1,9 @@
+#include "WindowsCompact.h"
+
 import CrtDebug;
 import EntryPoint;
 import WindowsApi;
 import WindowsMutex;
-import "WindowsCompact.h";
 
 // Indicates to hybrid graphics systems to prefer the discrete part by default
 extern "C"

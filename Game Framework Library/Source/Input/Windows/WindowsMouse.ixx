@@ -1,8 +1,11 @@
+module;
+
+#include "DirectXTKMouse.h"
+
 export module WindowsMouse;
 
 import std;
 import Mouse;
-import "DirectXTKMouse.h";
 
 export namespace gfl
 {

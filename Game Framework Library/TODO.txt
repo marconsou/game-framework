@@ -1,7 +1,9 @@
 IntelliSense issue on cpp files. WindowsSystemFactory.cpp IntelliSense
 Device Lost/Restore solution.
+Direct3D ReportDebug on Destructor.
 Pipeline Order, Transparent/Opaque Order and Sprite Batching.
-Pipeline State, Material, Managers (Shader and Texture).
+Multipass.
+Pipeline State, Material, Managers (Pipeline State, Shader and Texture).
 
 Old:
 TimerManagement, FPSTime and Interval (StepTimer). 
@@ -15,3 +17,4 @@ https://gameprogrammingpatterns.com/game-loop.html
 https://www.vinjn.com/awesome-d3d12/
 https://paminerva.github.io/
 https://alain.xyz/blog/raw-directx11#pipeline-state
+https://www.reddit.com/r/GraphicsProgramming/comments/1cr0cvz/learning_graphics_programming_in_2024/

@@ -1,6 +1,6 @@
 module;
 
-#include "WindowsCompact.h" //IntelliSense
+#include "WindowsCompact.h"
 
 module WindowsApp;
 

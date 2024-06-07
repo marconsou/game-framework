@@ -66,13 +66,21 @@
     <ClCompile Include="Source\Game\GameNotify.ixx" />
     <ClCompile Include="Source\Time\StepTimer.cpp" />
     <ClCompile Include="Source\Time\StepTimerNotify.ixx" />
+    <ClCompile Include="Source\Resource\Shader.ixx" />
+    <ClCompile Include="Source\Resource\Manager\ShaderManager.ixx" />
+    <ClCompile Include="Source\Video\VertexFormat.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11ShaderManager.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11ShaderManager.cpp" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11VertexShader.ixx" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11VertexShader.cpp" />
+    <ClCompile Include="Source\Video\Render\Direct3D11\Shader\Direct3D11Shader.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\Windows\WindowsCompact.h" />
-    <ClInclude Include="Source\Video\Render\Direct3D11\Direct3D11.h" />
     <ClInclude Include="Source\Input\Windows\DirectXTKKeyboard.h" />
     <ClInclude Include="Source\Input\Windows\DirectXTKMouse.h" />
     <ClInclude Include="Source\App\Windows\CrtDebug.h" />
+    <ClInclude Include="Source\Video\Render\Direct3D11\Direct3D11.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\VertexShader.hlsl" />

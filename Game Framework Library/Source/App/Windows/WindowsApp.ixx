@@ -1,3 +1,7 @@
+module;
+
+#include "WindowsCompact.h"
+
 export module WindowsApp;
 
 import App;
@@ -5,7 +9,6 @@ import AppConfiguration;
 import AppNotify;
 import DisplayNotify;
 import Log;
-import "WindowsCompact.h";
 
 export namespace gfl
 {

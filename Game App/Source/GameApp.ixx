@@ -6,14 +6,19 @@ import Game;
 import VideoConfiguration;
 import WindowsApi;
 import WindowsSystemFactory;
-
 import Timer;
+import Direct3D11Video;
+import Direct3D11ShaderManager;
+import ShaderManager;
 
 using namespace gfl;
 
 export class GameApp final : public Game
 {
 public:
+	Timer t;
+	std::unique_ptr<ShaderManager> shaderManager;
+
 	GameApp()
 	{
 		const AppConfiguration appConfiguration{.Title = "Game App",.Width = 800,.Height = 600,  .Windowed = true, .Resize = true,.ShowCursor = true};
@@ -26,6 +31,9 @@ public:
 		this->video = factory.CreateVideo(videoConfiguration, VideoSystem::Direct3D11);
 		this->input = factory.CreateInput();
 
+		this->shaderManager = std::make_unique<Direct3D11ShaderManager>(static_cast<Direct3D11Video*>(this->video.get()), this->log.get());
+		this->shaderManager->LoadVertexShader("VertexShader", "D:/Documents/Development/Visual Studio/Game Framework/x64/Debug/VertexShader.cso", VertexFormat::PositionColor);
+
 		this->CreateDeviceDependentResources();
 		this->CreateWindowSizeDependentResources();
 
@@ -37,7 +45,7 @@ public:
 
 		//this->timer.Start();
 	}
-	Timer t;
+
 	void Update()
 	{
 		float elapsedTime = float(this->timer.GetElapsedSeconds());

@@ -1,6 +1,8 @@
-export module WindowsMutex;
+module;
 
-import "WindowsCompact.h";
+#include "WindowsCompact.h"
+
+export module WindowsMutex;
 
 export namespace gfl
 {

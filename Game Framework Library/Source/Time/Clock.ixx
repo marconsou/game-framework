@@ -1,6 +1,6 @@
 module;
 
-#include <chrono> //IntelliSense
+#include <chrono>
 
 export module Clock;
 

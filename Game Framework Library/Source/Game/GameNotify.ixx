@@ -15,13 +15,6 @@ export namespace gfl
 		GameNotify(GameNotify&&) = delete;
 		GameNotify& operator=(const GameNotify&) = delete;
 		GameNotify& operator=(GameNotify&&) = delete;
-		virtual ~GameNotify() = 0;
+		virtual ~GameNotify() = 0 {};
 	};
-}
-
-module : private;
-
-namespace gfl
-{
-	GameNotify::~GameNotify() = default;
 }

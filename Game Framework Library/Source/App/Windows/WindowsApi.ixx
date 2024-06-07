@@ -1,8 +1,11 @@
+module;
+
+#include "WindowsCompact.h"
+
 export module WindowsApi;
 
 import std;
 import AppConfiguration;
-import "WindowsCompact.h";
 
 export namespace gfl
 {
