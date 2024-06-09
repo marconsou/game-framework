@@ -1,11 +1,11 @@
 module;
 
-#include "Direct3D11.h" //IntelliSense
+#include "Direct3D11.h"
 
 module Direct3D11Video;
 
+import File;
 import WindowsApi;
-import "Direct3D11.h";
 
 namespace gfl
 {
@@ -22,15 +22,38 @@ namespace gfl
 
 	Direct3D11Video::~Direct3D11Video()
 	{
-		this->ReportDebug();
+		this->Cleanup();
 	}
 
-	void Direct3D11Video::ResetResources()
+	void Direct3D11Video::ResetDeviceResources()
+	{
+		this->shaders.Clear();
+		this->vertexBuffers.Clear();
+	}
+
+	void Direct3D11Video::ResetWindowSizeDependentResources()
 	{
 		this->renderTargetView.Reset();
 		this->depthStencilView.Reset();
 		this->renderTarget.Reset();
 		this->depthStencil.Reset();
+	}
+
+	void Direct3D11Video::Cleanup()
+	{
+		this->ResetDeviceResources();
+		this->ResetWindowSizeDependentResources();
+
+		this->swapChain.Reset();
+
+		this->context->ClearState();
+		this->context->Flush();
+		this->context.Reset();
+
+		this->ReportDebug();
+
+		this->device.Reset();
+		this->dxgiFactory.Reset();
 	}
 
 	void Direct3D11Video::SetVideoNotify(VideoNotify* videoNotify)
@@ -43,6 +66,26 @@ namespace gfl
 		return &this->direct3DDisplayEvent;
 	}
 
+	ID3D11Device1* Direct3D11Video::GetDevice() const
+	{
+		return this->device.Get();
+	}
+
+	ID3D11DeviceContext1* Direct3D11Video::GetContext() const
+	{
+		return this->context.Get();
+	}
+
+	void Direct3D11Video::AddShader(std::string_view resourceName, std::unique_ptr<Direct3D11Shader> direct3D11Shader)
+	{
+		this->shaders.Add(resourceName.data(), std::move(direct3D11Shader));
+	}
+
+	const Direct3D11Shader* Direct3D11Video::GetShader(std::string_view resourceName) const
+	{
+		return this->shaders.Get(resourceName);
+	}
+
 	void Direct3D11Video::CheckForCPUFeatureSupport()
 	{
 		if (!DirectX::XMVerifyCPUSupport())
@@ -51,11 +94,14 @@ namespace gfl
 
 	void Direct3D11Video::CreateDeviceResources()
 	{
+		this->ResetDeviceResources();
+
 		const auto creationFlags{this->CheckForSDKLayerSupport()};
 		this->CreateFactory();
 		this->CheckForFeaturesSupport();
 		this->CreateDevice(creationFlags);
 		this->CreateDebug();
+		this->CreateBuffers();
 	}
 
 	void Direct3D11Video::CreateWindowSizeDependentResources()
@@ -64,8 +110,8 @@ namespace gfl
 		if (!handleWindow)
 			this->log->Error("Invalid window handle!");
 
-		this->context->OMSetRenderTargets(0, nullptr, nullptr);
-		this->ResetResources();
+		this->context->ClearState();
+		this->ResetWindowSizeDependentResources();
 		this->context->Flush();
 
 		const auto backBufferWidth{static_cast<UINT>(this->videoConfiguration.Width)};
@@ -95,6 +141,7 @@ namespace gfl
 				.Width = backBufferWidth,
 				.Height = backBufferHeight,
 				.Format = backBufferFormat,
+				.Stereo = FALSE,
 				.SampleDesc =
 				{
 					.Count = 1,
@@ -110,6 +157,13 @@ namespace gfl
 
 			const DXGI_SWAP_CHAIN_FULLSCREEN_DESC fullScreenSwapChainDesc
 			{
+				.RefreshRate =
+				{
+					.Numerator = 0,
+					.Denominator = 0
+				},
+				.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED,
+				.Scaling = DXGI_MODE_SCALING_UNSPECIFIED,
 				.Windowed = TRUE
 			};
 
@@ -142,6 +196,11 @@ namespace gfl
 		this->screenViewport = {0.0f, 0.0f, static_cast<float>(backBufferWidth), static_cast<float>(backBufferHeight), 0.0f, 1.0f};
 	}
 
+	void Direct3D11Video::CreateBuffers()
+	{
+		this->vertexBuffers.Add("Dynamic", std::make_unique<Direct3D11VertexBuffer>(1024, this->device.Get(), this->log));
+	}
+
 	UINT Direct3D11Video::CheckForSDKLayerSupport()
 	{
 		UINT creationFlags{D3D11_CREATE_DEVICE_BGRA_SUPPORT};
@@ -156,7 +215,7 @@ namespace gfl
 
 	void Direct3D11Video::CreateFactory()
 	{
-#ifdef _DEBUG
+#ifdef _DEBUG 
 		bool debugDXGI{};
 		Microsoft::WRL::ComPtr<IDXGIInfoQueue> dxgiInfoQueue;
 		if (WindowsApi::Succeeded(DXGIGetDebugInterface1(0, IID_PPV_ARGS(dxgiInfoQueue.GetAddressOf()))))
@@ -373,7 +432,7 @@ namespace gfl
 		Microsoft::WRL::ComPtr<ID3D11Debug> debug;
 		if (WindowsApi::Succeeded(this->device.As(&debug)))
 		{
-			if (WindowsApi::Failed(debug->ReportLiveDeviceObjects(D3D11_RLDO_SUMMARY | D3D11_RLDO_DETAIL)))
+			if (WindowsApi::Failed(debug->ReportLiveDeviceObjects(D3D11_RLDO_SUMMARY | D3D11_RLDO_DETAIL | D3D11_RLDO_IGNORE_INTERNAL)))
 				this->log->Error("ReportLiveDeviceObjects");
 		}
 		else
@@ -485,15 +544,7 @@ namespace gfl
 		if (this->deviceNotify)
 			this->deviceNotify->OnDeviceLost();
 
-		this->ResetResources();
-
-		this->swapChain.Reset();
-		this->context.Reset();
-
-		this->ReportDebug();
-
-		this->device.Reset();
-		this->dxgiFactory.Reset();
+		this->Cleanup();
 
 		this->CreateDeviceResources();
 		this->CreateWindowSizeDependentResources();
@@ -573,6 +624,7 @@ namespace gfl
 	void Direct3D11Video::Render(const Color& clearColor)
 	{
 		this->Clear(clearColor);
+		this->_Render_();
 		this->Present();
 	}
 
@@ -590,5 +642,33 @@ namespace gfl
 	constexpr long Direct3D11Video::ComputeIntersectionArea(long ax1, long ay1, long ax2, long ay2, long bx1, long by1, long bx2, long by2)
 	{
 		return std::max(0l, std::min(ax2, bx2) - std::max(ax1, bx1)) * std::max(0l, std::min(ay2, by2) - std::max(ay1, by1));
+	}
+
+	void Direct3D11Video::_Render_()
+	{
+		struct Vertex
+		{
+			DirectX::XMFLOAT3 position;
+			DirectX::XMFLOAT4 color;
+		};
+
+		constexpr Vertex vertexData[6] =
+		{
+			{ { 0.0f,   0.5f,  0.5f/*, 1.0f*/ },{ 1.0f, 0.0f, 0.0f, 1.0f } },  // Top / Red
+			{ { 0.5f,  -0.5f,  0.5f/*, 1.0f*/ },{ 0.0f, 1.0f, 0.0f, 1.0f } },  // Right / Green
+			{ { -0.5f, -0.5f,  0.5f/*, 1.0f*/ },{ 0.0f, 0.0f, 1.0f, 1.0f } },   // Left / Blue
+
+			{ { 0.0f,   0.5f,  0.5f/*, 1.0f*/ },{ 1.0f, 0.0f, 0.0f, 1.0f } },  // Top / Red
+			{ { 1.0f,  0.5f,  0.5f/*, 1.0f*/ },{ 0.0f, 0.0f, 1.0f, 1.0f } },  // Right / Green
+			{ { 0.5f, -0.5f,  0.5f/*, 1.0f*/ },{ 0.0f, 1.0f, 0.0f, 1.0f } }   // Left / Blue
+		};
+
+		this->vertexBuffers.Get("Dynamic")->MapData(vertexData, this->context.Get());
+
+		this->shaders.Get("VertexShader")->SetShader(this->context.Get());
+		this->shaders.Get("PixelShader")->SetShader(this->context.Get());
+		this->vertexBuffers.Get("Dynamic")->SetVertexBuffer(sizeof(Vertex), this->context.Get());
+		this->context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		this->context->Draw(6, 0);
 	}
 }

@@ -1,17 +1,19 @@
 module;
 
-#include "Direct3D11.h" //IntelliSense
+#include "Direct3D11.h"
 
 export module Direct3D11Video;
 
 import DeviceNotify;
+import Direct3D11Shader;
+import Direct3D11VertexBuffer;
 import Direct3DDisplayEvent;
 import Direct3DVideo;
 import DisplayNotify;
 import Log;
+import ResourceStorage;
 import VideoConfiguration;
 import VideoNotify;
-import "Direct3D11.h";
 
 export namespace gfl
 {
@@ -22,6 +24,10 @@ export namespace gfl
 		~Direct3D11Video();
 		void SetVideoNotify(VideoNotify* videoNotify);
 		DisplayNotify* GetDisplayNotify();
+		ID3D11Device1* GetDevice() const;
+		ID3D11DeviceContext1* GetContext() const;
+		void AddShader(std::string_view resourceName, std::unique_ptr<Direct3D11Shader> direct3D11Shader);
+		const Direct3D11Shader* GetShader(std::string_view resourceName) const;
 	private:
 		bool flipPresent{true};
 		bool allowTearing{true};
@@ -31,7 +37,7 @@ export namespace gfl
 		Log* log{};
 		Direct3DDisplayEvent direct3DDisplayEvent;
 		D3D_FEATURE_LEVEL featureLevel{D3D_FEATURE_LEVEL_12_1};
-		const DXGI_FORMAT backBufferFormat{DXGI_FORMAT_B8G8R8A8_UNORM};
+		const DXGI_FORMAT backBufferFormat{DXGI_FORMAT_B8G8R8A8_UNORM_SRGB};
 		const DXGI_FORMAT depthBufferFormat{DXGI_FORMAT_D32_FLOAT};
 		const UINT backBufferCount{2};
 		D3D11_VIEWPORT screenViewport{};
@@ -43,10 +49,15 @@ export namespace gfl
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencil;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
-		void ResetResources();
+		ResourceStorage<Direct3D11Shader> shaders;
+		ResourceStorage<Direct3D11VertexBuffer> vertexBuffers;
+		void ResetDeviceResources();
+		void ResetWindowSizeDependentResources();
+		void Cleanup();
 		void CheckForCPUFeatureSupport();
 		void CreateDeviceResources();
 		void CreateWindowSizeDependentResources();
+		void CreateBuffers();
 		UINT CheckForSDKLayerSupport();
 		void CreateFactory();
 		void CheckForFeaturesSupport();
@@ -62,5 +73,10 @@ export namespace gfl
 		void Render(const Color& clearColor) override;
 		static constexpr DXGI_FORMAT NoSRGB(DXGI_FORMAT format);
 		static constexpr long ComputeIntersectionArea(long ax1, long ay1, long ax2, long ay2, long bx1, long by1, long bx2, long by2);
+
+
+		//
+		void _Render_();
+		//
 	};
 }
