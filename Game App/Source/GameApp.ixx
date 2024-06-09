@@ -2,14 +2,14 @@ export module GameApp;
 
 import AppConfiguration;
 import ColorPalette;
+import Direct3D11ShaderManager;
+import Direct3D11Video;
 import Game;
+import ShaderManager;
+import Timer;
 import VideoConfiguration;
 import WindowsApi;
 import WindowsSystemFactory;
-import Timer;
-import Direct3D11Video;
-import Direct3D11ShaderManager;
-import ShaderManager;
 
 using namespace gfl;
 
