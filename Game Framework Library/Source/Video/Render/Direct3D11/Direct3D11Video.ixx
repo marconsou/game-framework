@@ -1,6 +1,7 @@
 module;
 
 #include "Direct3D11.h"
+#include <directxtk/CommonStates.h>
 
 export module Direct3D11Video;
 
@@ -49,6 +50,7 @@ export namespace gfl
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencil;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
+		std::unique_ptr<DirectX::CommonStates> states;
 		ResourceStorage<Direct3D11Shader> shaders;
 		ResourceStorage<Direct3D11VertexBuffer> vertexBuffers;
 		void ResetDeviceResources();
@@ -58,6 +60,7 @@ export namespace gfl
 		void CreateDeviceResources();
 		void CreateWindowSizeDependentResources();
 		void CreateBuffers();
+		void CreateStates();
 		UINT CheckForSDKLayerSupport();
 		void CreateFactory();
 		void CheckForFeaturesSupport();
@@ -73,7 +76,6 @@ export namespace gfl
 		void Render(const Color& clearColor) override;
 		static constexpr DXGI_FORMAT NoSRGB(DXGI_FORMAT format);
 		static constexpr long ComputeIntersectionArea(long ax1, long ay1, long ax2, long ay2, long bx1, long by1, long bx2, long by2);
-
 
 		//
 		void _Render_();

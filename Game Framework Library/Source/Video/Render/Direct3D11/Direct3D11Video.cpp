@@ -1,6 +1,7 @@
 module;
 
 #include "Direct3D11.h"
+#include <directxtk/CommonStates.h>
 
 module Direct3D11Video;
 
@@ -27,6 +28,7 @@ namespace gfl
 
 	void Direct3D11Video::ResetDeviceResources()
 	{
+		this->states.reset();
 		this->shaders.Clear();
 		this->vertexBuffers.Clear();
 	}
@@ -41,12 +43,13 @@ namespace gfl
 
 	void Direct3D11Video::Cleanup()
 	{
+		this->context->ClearState();
+
 		this->ResetDeviceResources();
 		this->ResetWindowSizeDependentResources();
 
 		this->swapChain.Reset();
-
-		this->context->ClearState();
+		
 		this->context->Flush();
 		this->context.Reset();
 
@@ -102,6 +105,7 @@ namespace gfl
 		this->CreateDevice(creationFlags);
 		this->CreateDebug();
 		this->CreateBuffers();
+		this->CreateStates();
 	}
 
 	void Direct3D11Video::CreateWindowSizeDependentResources()
@@ -199,6 +203,11 @@ namespace gfl
 	void Direct3D11Video::CreateBuffers()
 	{
 		this->vertexBuffers.Add("Dynamic", std::make_unique<Direct3D11VertexBuffer>(1024, this->device.Get(), this->log));
+	}
+
+	void Direct3D11Video::CreateStates()
+	{
+		this->states = std::make_unique<DirectX::CommonStates>(this->device.Get());
 	}
 
 	UINT Direct3D11Video::CheckForSDKLayerSupport()
@@ -579,6 +588,12 @@ namespace gfl
 		this->context->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		this->context->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), this->depthStencilView.Get());
 		this->context->RSSetViewports(1, &this->screenViewport);
+
+		this->context->OMSetBlendState(this->states->AlphaBlend(), DirectX::Colors::Black, 0xFFFFFFFF);
+		this->context->OMSetDepthStencilState(this->states->DepthDefault(), 0);
+
+		auto samplerState = this->states->LinearWrap();
+		this->context->PSSetSamplers(0, 1, &samplerState);
 	}
 
 	void Direct3D11Video::Present()
@@ -632,10 +647,10 @@ namespace gfl
 	{
 		switch (format)
 		{
-		case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:   return DXGI_FORMAT_R8G8B8A8_UNORM;
-		case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:   return DXGI_FORMAT_B8G8R8A8_UNORM;
-		case DXGI_FORMAT_B8G8R8X8_UNORM_SRGB:   return DXGI_FORMAT_B8G8R8X8_UNORM;
-		default:                                return format;
+		case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB: return DXGI_FORMAT_R8G8B8A8_UNORM;
+		case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB: return DXGI_FORMAT_B8G8R8A8_UNORM;
+		case DXGI_FORMAT_B8G8R8X8_UNORM_SRGB: return DXGI_FORMAT_B8G8R8X8_UNORM;
+		default: return format;
 		}
 	}
 
@@ -654,14 +669,18 @@ namespace gfl
 
 		constexpr Vertex vertexData[6] =
 		{
-			{ { 0.0f,   0.5f,  0.5f/*, 1.0f*/ },{ 1.0f, 0.0f, 0.0f, 1.0f } },  // Top / Red
+			{ { 0.0f,   0.5f,  0.5f/*, 1.0f*/ },{ 1.0f, 0.0f, 0.0f, 0.5f } },  // Top / Red
 			{ { 0.5f,  -0.5f,  0.5f/*, 1.0f*/ },{ 0.0f, 1.0f, 0.0f, 1.0f } },  // Right / Green
 			{ { -0.5f, -0.5f,  0.5f/*, 1.0f*/ },{ 0.0f, 0.0f, 1.0f, 1.0f } },   // Left / Blue
 
-			{ { 0.0f,   0.5f,  0.5f/*, 1.0f*/ },{ 1.0f, 0.0f, 0.0f, 1.0f } },  // Top / Red
+			{ { 0.0f,   0.5f,  0.5f/*, 1.0f*/ },{ 1.0f, 0.0f, 0.0f, 0.5f } },  // Top / Red
 			{ { 1.0f,  0.5f,  0.5f/*, 1.0f*/ },{ 0.0f, 0.0f, 1.0f, 1.0f } },  // Right / Green
 			{ { 0.5f, -0.5f,  0.5f/*, 1.0f*/ },{ 0.0f, 1.0f, 0.0f, 1.0f } }   // Left / Blue
 		};
+		//DirectX::XMMatrixOrthographicOffCenterLH(0.0f, static_cast<float>(this->configuration.Width), static_cast<float>(this->configuration.Height), 0.0f, 0.0f, 1.0f);
+		const auto orthographic = DirectX::XMMatrixOrthographicOffCenterLH(0.0f, static_cast<float>(this->videoConfiguration.Width), static_cast<float>(this->videoConfiguration.Height), 0.0f, 0.0f, 1.0f);
+
+		//orthographic* vertexData[0].position;
 
 		this->vertexBuffers.Get("Dynamic")->MapData(vertexData, this->context.Get());
 
